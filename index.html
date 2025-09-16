@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mobile Camera App</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <style>
     body {
       margin: 0;
@@ -13,8 +17,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100dvh;
+      /* Robust full-height across mobile browsers */
+      min-height: 100svh;
+      height: calc(var(--app-vh, 1vh) * 100);
       overflow: hidden;
+      overscroll-behavior: none;
     }
     #camera {
       flex: 1;
@@ -57,6 +64,8 @@
       font-size: clamp(18px, 2.6vw, 24px);
       cursor: pointer;
       padding: 6px 8px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     #gallery {
       background: #111;
@@ -97,6 +106,8 @@
       padding: 3px 6px;
       border-radius: 6px;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     /* Modal base */
     .modal {
@@ -204,20 +215,92 @@
         height: clamp(56px, 10vh, 90px);
       }
     }
+    /* iOS-style button */
+    .ios-btn {
+      padding: 12px 24px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(42, 42, 42, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ios-btn:hover {
+      background: rgba(60, 60, 60, 0.9);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    .ios-btn:active { 
+      background: rgba(30, 30, 30, 0.9);
+      transform: translateY(0px);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    }
+    /* Size variants aligned to existing UI */
+    .tool-btn.ios-btn { 
+      padding: 8px 14px; 
+      font-size: clamp(14px, 2.2vw, 16px);
+      background: rgba(34, 34, 34, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .mini-btn.ios-btn { 
+      padding: 4px 8px; 
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .btn.ios-btn { 
+      padding: 10px 16px; 
+      font-size: 14px;
+      background: rgba(42, 42, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn.primary.ios-btn { 
+      color: #ffffff; 
+      background: rgba(10, 132, 255, 0.8);
+      border: 1px solid rgba(10, 132, 255, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .btn.primary.ios-btn:hover {
+      background: rgba(10, 132, 255, 0.9);
+      border-color: rgba(10, 132, 255, 0.8);
+    }
+    .btn.danger.ios-btn { 
+      color: #ffffff; 
+      background: rgba(255, 69, 58, 0.8);
+      border: 1px solid rgba(255, 69, 58, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .btn.danger.ios-btn:hover {
+      background: rgba(255, 69, 58, 0.9);
+      border-color: rgba(255, 69, 58, 0.8);
+    }
   </style>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
 <body>
   <div id="camera">
-    <video id="video" autoplay playsinline></video>
+    <video id="video" autoplay playsinline muted></video>
     <button id="captureBtn"></button>
   </div>
 
   <div id="toolbar">
-    <button class="tool-btn" id="switchCam">🔄</button>
-    <button class="tool-btn" id="flash">⚡</button>
-    <button class="tool-btn" id="settings">⚙️</button>
-    <button class="tool-btn" id="autoSaveToggle" title="Tự động tải ảnh">💾 OFF</button>
-    <button class="tool-btn" id="openLibrary" title="Xem thư viện">🖼️</button>
+    <button class="tool-btn ios-btn" id="switchCam" aria-label="Đổi camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="flash" aria-label="Đèn flash"><iconify-icon icon="ion:flash-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="settings" aria-label="Cài đặt"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="autoSaveToggle" title="Tự động tải ảnh" aria-pressed="false"></button>
+    <button class="tool-btn ios-btn" id="openLibrary" title="Xem thư viện" aria-label="Thư viện"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
   </div>
 
   <div id="gallery"></div>
@@ -227,7 +310,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title">Thư viện ảnh</div>
-        <button class="close-btn" data-close-lib>✖</button>
+        <button class="close-btn ios-btn" data-close-lib aria-label="Đóng"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
       </div>
       <div class="modal-body">
         <div id="libraryGrid" class="lib-grid"></div>
@@ -240,13 +323,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title">Xem ảnh</div>
-        <button class="close-btn" data-close-preview>✖</button>
+        <button class="close-btn ios-btn" data-close-preview aria-label="Đóng"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
       </div>
       <div class="modal-body">
         <img id="previewImage" class="preview-image" alt="Preview" />
         <div class="preview-actions">
-          <button id="downloadPreview" class="btn primary">Tải xuống</button>
-          <button id="deletePreview" class="btn danger">Xóa</button>
+          <button id="downloadPreview" class="btn primary ios-btn"><iconify-icon icon="ion:download-outline"></iconify-icon><span>Tải xuống</span></button>
+          <button id="deletePreview" class="btn danger ios-btn"><iconify-icon icon="ion:trash-outline"></iconify-icon><span>Xóa</span></button>
         </div>
       </div>
     </div>
@@ -255,6 +338,15 @@
   <canvas id="canvas" style="display:none;"></canvas>
 
   <script>
+    // Viewport height fix for mobile browsers UI chrome
+    function setAppVhUnit() {
+      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      document.documentElement.style.setProperty('--app-vh', `${vh * 0.01}px`);
+    }
+    setAppVhUnit();
+    window.addEventListener('resize', setAppVhUnit, { passive: true });
+    window.addEventListener('orientationchange', setAppVhUnit, { passive: true });
+
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
@@ -345,9 +437,32 @@
       if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
       }
-      currentStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: useFront ? 'user' : 'environment' }
-      });
+      const preferredConstraints = {
+        video: {
+          facingMode: useFront ? 'user' : 'environment',
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+          aspectRatio: { ideal: window.innerWidth / Math.max(1, window.innerHeight) },
+        },
+        audio: false,
+      };
+      const fallbackConstraints = {
+        video: { facingMode: useFront ? 'user' : 'environment' },
+        audio: false,
+      };
+      try {
+        currentStream = await navigator.mediaDevices.getUserMedia(preferredConstraints);
+      } catch (e1) {
+        try {
+          currentStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+        } catch (e2) {
+          console.error('Không thể truy cập camera', e2);
+          alert('Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập hoặc thử trình duyệt khác.');
+          return;
+        }
+      }
+      video.muted = true;
+      video.playsInline = true;
       video.srcObject = currentStream;
     }
 
@@ -362,6 +477,11 @@
         downloadPhoto(photo.id);
       }
     };
+
+    // Reinitialize camera on orientation change for better aspect match
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => initCamera(), 300);
+    }, { passive: true });
 
     function addPhoto(dataUrl) {
       const id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
@@ -394,8 +514,8 @@
         actions.className = 'thumb-actions';
 
         const dl = document.createElement('button');
-        dl.className = 'mini-btn';
-        dl.textContent = '↓';
+        dl.className = 'mini-btn ios-btn';
+        dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
         dl.title = 'Tải xuống';
         dl.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -403,8 +523,8 @@
         });
 
         const del = document.createElement('button');
-        del.className = 'mini-btn';
-        del.textContent = '✖';
+        del.className = 'mini-btn ios-btn';
+        del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
         del.title = 'Xóa';
         del.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -447,16 +567,16 @@
         actions.className = 'lib-actions';
 
         const dl = document.createElement('button');
-        dl.className = 'mini-btn';
-        dl.textContent = 'Tải';
+        dl.className = 'mini-btn ios-btn';
+        dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
         dl.addEventListener('click', (e) => {
           e.stopPropagation();
           downloadPhoto(p.id);
         });
 
         const del = document.createElement('button');
-        del.className = 'mini-btn';
-        del.textContent = 'Xóa';
+        del.className = 'mini-btn ios-btn';
+        del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
         del.addEventListener('click', (e) => {
           e.stopPropagation();
           deletePhoto(p.id);
@@ -515,8 +635,9 @@
 
     // Auto save toggle
     function updateAutoSaveBtn() {
-      autoSaveToggle.textContent = autoSave ? '💾 ON' : '💾 OFF';
-      autoSaveToggle.style.color = autoSave ? '#0a84ff' : '#fff';
+      const label = autoSave ? 'ON' : 'OFF';
+      autoSaveToggle.innerHTML = '<iconify-icon icon="ion:save-outline"></iconify-icon><span>'+label+'</span>';
+      autoSaveToggle.setAttribute('aria-pressed', String(autoSave));
     }
     autoSaveToggle.addEventListener('click', () => {
       autoSave = !autoSave;
