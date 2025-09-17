@@ -4,22 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text2 - Camera</title>
-  <meta name="description" content="Online camera, fast and best">
-  <meta name="keywords" content="Text2 - Camera, online camera, fast camera, best camera, web camera, take photo online">
-  <link rel="canonical" href="https://camera.text2.click/">
-  <meta name="robots" content="index, follow">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Text2">
-  <meta property="og:title" content="Text2 - Camera | Online camera, fast and best">
-  <meta property="og:description" content="Online camera, fast and best">
-  <meta property="og:url" content="https://camera.text2.click/">
-  <meta property="og:image" content="https://camera.text2.click/android-chrome-512x512.png">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Text2 - Camera | Online camera, fast and best">
-  <meta name="twitter:description" content="Online camera, fast and best">
-  <meta name="twitter:image" content="https://camera.text2.click/android-chrome-512x512.png">
 <!-- Google tag (gtag.js) - GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEFG123"></script>
 <script>
@@ -311,6 +295,23 @@
       background: rgba(255, 69, 58, 0.9);
       border-color: rgba(255, 69, 58, 0.8);
     }
+    /* Settings menu */
+    #settingsMenu {
+      position: fixed;
+      right: 10px;
+      top: calc(52px + env(safe-area-inset-top, 0px));
+      background: rgba(26,26,26,0.95);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 8px;
+      display: none;
+      z-index: 1200;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    #settingsMenu.show { display: block; }
+    #settingsMenu .menu-item { margin: 4px 0; }
   </style>
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -326,6 +327,11 @@
     <button class="tool-btn ios-btn" id="settings" aria-label="Settings"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
     <button class="tool-btn ios-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false"></button>
     <button class="tool-btn ios-btn" id="openLibrary" title="View library" aria-label="Library"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
+  </div>
+
+  <!-- Settings Menu -->
+  <div id="settingsMenu" role="menu" aria-hidden="true">
+    <button id="btnReloadAssets" class="btn ios-btn menu-item"><iconify-icon icon="ion:refresh-outline"></iconify-icon><span>Làm mới tài nguyên (offline)</span></button>
   </div>
 
   <div id="gallery"></div>
@@ -378,6 +384,9 @@
     const gallery = document.getElementById('gallery');
     const openLibraryBtn = document.getElementById('openLibrary');
     const autoSaveToggle = document.getElementById('autoSaveToggle');
+    const settingsBtn = document.getElementById('settings');
+    const settingsMenu = document.getElementById('settingsMenu');
+    const btnReloadAssets = document.getElementById('btnReloadAssets');
     const libraryModal = document.getElementById('libraryModal');
     const libraryGrid = document.getElementById('libraryGrid');
     const previewModal = document.getElementById('previewModal');
@@ -707,6 +716,69 @@
       }
       initCamera();
     })();
+
+    // ===== Service Worker Registration =====
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          // Listen for updatefound to auto-activate new SW
+          if (reg.waiting) {
+            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+          }
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', () => {
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                // New version installed; optionally notify user
+              }
+            });
+          });
+        }).catch(() => {});
+      });
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'RELOAD_NOW') {
+          window.location.reload(true);
+        }
+      });
+    }
+
+    // ===== Settings menu actions =====
+    function toggleSettingsMenu(show) {
+      const willShow = typeof show === 'boolean' ? show : !settingsMenu.classList.contains('show');
+      if (willShow) {
+        settingsMenu.classList.add('show');
+        settingsMenu.setAttribute('aria-hidden', 'false');
+      } else {
+        settingsMenu.classList.remove('show');
+        settingsMenu.setAttribute('aria-hidden', 'true');
+      }
+    }
+    settingsBtn.addEventListener('click', () => toggleSettingsMenu());
+    document.addEventListener('click', (e) => {
+      const within = settingsMenu.contains(e.target) || settingsBtn.contains(e.target);
+      if (!within) toggleSettingsMenu(false);
+    }, { passive: true });
+
+    btnReloadAssets.addEventListener('click', async () => {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (reg && reg.active) {
+          reg.active.postMessage({ type: 'CLEAR_AND_RELOAD' });
+          // Give SW a moment to clear caches, then hard reload
+          setTimeout(() => window.location.reload(true), 300);
+        } else {
+          // Fallback: clear caches via CacheStorage API then reload
+          if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+          }
+          window.location.reload(true);
+        }
+      } catch (e) {
+        window.location.reload(true);
+      }
+    });
   </script>
 </body>
 </html>
