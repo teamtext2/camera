@@ -473,13 +473,22 @@
       video.muted = true;
       video.playsInline = true;
       video.srcObject = currentStream;
+      // Mirror preview for front camera by default
+      video.style.transform = useFront ? 'scaleX(-1)' : 'none';
     }
 
     captureBtn.onclick = () => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0);
+      // Mirror captured image to match preview when using front camera
+      ctx.save();
+      if (useFront) {
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+      }
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      ctx.restore();
       const dataUrl = canvas.toDataURL('image/png');
       const photo = addPhoto(dataUrl);
       if (autoSave && photo) {
