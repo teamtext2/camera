@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Camera App</title>
+  <title>Text2 - Camera | Online camera, fast and best</title>
+  <meta name="description" content="Online camera, fast and best">
+  <meta name="keywords" content="Text2 - Camera, online camera, fast camera, best camera, web camera, take photo online">
+  <link rel="canonical" href="https://camera.text2.click/">
+  <meta name="robots" content="index, follow">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Text2">
+  <meta property="og:title" content="Text2 - Camera | Online camera, fast and best">
+  <meta property="og:description" content="Online camera, fast and best">
+  <meta property="og:url" content="https://camera.text2.click/">
+  <meta property="og:image" content="https://camera.text2.click/android-chrome-512x512.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Text2 - Camera | Online camera, fast and best">
+  <meta name="twitter:description" content="Online camera, fast and best">
+  <meta name="twitter:image" content="https://camera.text2.click/android-chrome-512x512.png">
 <!-- Google tag (gtag.js) - GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEFG123"></script>
 <script>
@@ -305,11 +321,11 @@
   </div>
 
   <div id="toolbar">
-    <button class="tool-btn ios-btn" id="switchCam" aria-label="Đổi camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="flash" aria-label="Đèn flash"><iconify-icon icon="ion:flash-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="settings" aria-label="Cài đặt"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="autoSaveToggle" title="Tự động tải ảnh" aria-pressed="false"></button>
-    <button class="tool-btn ios-btn" id="openLibrary" title="Xem thư viện" aria-label="Thư viện"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="switchCam" aria-label="Switch camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="flash" aria-label="Flash"><iconify-icon icon="ion:flash-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="settings" aria-label="Settings"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false"></button>
+    <button class="tool-btn ios-btn" id="openLibrary" title="View library" aria-label="Library"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
   </div>
 
   <div id="gallery"></div>
@@ -318,8 +334,8 @@
   <div id="libraryModal" class="modal" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">Thư viện ảnh</div>
-        <button class="close-btn ios-btn" data-close-lib aria-label="Đóng"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+        <div class="modal-title">Photo Library</div>
+        <button class="close-btn ios-btn" data-close-lib aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
       </div>
       <div class="modal-body">
         <div id="libraryGrid" class="lib-grid"></div>
@@ -331,14 +347,14 @@
   <div id="previewModal" class="modal" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">Xem ảnh</div>
-        <button class="close-btn ios-btn" data-close-preview aria-label="Đóng"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+        <div class="modal-title">View Photo</div>
+        <button class="close-btn ios-btn" data-close-preview aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
       </div>
       <div class="modal-body">
         <img id="previewImage" class="preview-image" alt="Preview" />
         <div class="preview-actions">
-          <button id="downloadPreview" class="btn primary ios-btn"><iconify-icon icon="ion:download-outline"></iconify-icon><span>Tải xuống</span></button>
-          <button id="deletePreview" class="btn danger ios-btn"><iconify-icon icon="ion:trash-outline"></iconify-icon><span>Xóa</span></button>
+          <button id="downloadPreview" class="btn primary ios-btn"><iconify-icon icon="ion:download-outline"></iconify-icon><span>Download</span></button>
+          <button id="deletePreview" class="btn danger ios-btn"><iconify-icon icon="ion:trash-outline"></iconify-icon><span>Delete</span></button>
         </div>
       </div>
     </div>
@@ -404,7 +420,7 @@
           tx.onerror = () => reject(tx.error);
         });
       } catch (e) {
-        console.error('Lỗi lưu ảnh vào cache', e);
+        console.error('Error saving photo to cache', e);
       }
     }
 
@@ -418,7 +434,7 @@
           tx.onerror = () => reject(tx.error);
         });
       } catch (e) {
-        console.error('Lỗi xóa ảnh trong cache', e);
+        console.error('Error deleting photo from cache', e);
       }
     }
 
@@ -430,14 +446,14 @@
           const req = tx.objectStore(STORE_PHOTOS).getAll();
           req.onsuccess = () => {
             const list = req.result || [];
-            // Sắp xếp mới nhất trước
+            // Sort newest first
             list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             resolve(list);
           };
           req.onerror = () => reject(req.error);
         });
       } catch (e) {
-        console.error('Lỗi tải ảnh từ cache', e);
+        console.error('Error loading photos from cache', e);
         return [];
       }
     }
@@ -465,8 +481,8 @@
         try {
           currentStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
         } catch (e2) {
-          console.error('Không thể truy cập camera', e2);
-          alert('Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập hoặc thử trình duyệt khác.');
+          console.error('Cannot access camera', e2);
+          alert('Cannot access camera. Please check access permissions or try a different browser.');
           return;
         }
       }
@@ -510,7 +526,7 @@
       photos.unshift(photo);
       renderThumbRow();
       if (libraryModal.classList.contains('show')) renderLibrary();
-      // Lưu vào IndexedDB để cache ngoại tuyến
+      // Save to IndexedDB for offline cache
       dbSavePhoto(photo);
       return photo;
     }
@@ -534,7 +550,7 @@
         const dl = document.createElement('button');
         dl.className = 'mini-btn ios-btn';
         dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
-        dl.title = 'Tải xuống';
+        dl.title = 'Download';
         dl.addEventListener('click', (e) => {
           e.stopPropagation();
           downloadPhoto(p.id);
@@ -543,7 +559,7 @@
         const del = document.createElement('button');
         del.className = 'mini-btn ios-btn';
         del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
-        del.title = 'Xóa';
+        del.title = 'Delete';
         del.addEventListener('click', (e) => {
           e.stopPropagation();
           deletePhoto(p.id);
@@ -642,7 +658,7 @@
       renderThumbRow();
       if (libraryModal.classList.contains('show')) renderLibrary();
       if (activePhotoId === photoId) closePreview();
-      // Xóa khỏi IndexedDB
+      // Delete from IndexedDB
       dbDeletePhoto(photoId);
     }
 
@@ -682,7 +698,7 @@
       if (activePhotoId) deletePhoto(activePhotoId);
     });
 
-    // Khởi động: tải ảnh từ cache rồi bật camera
+    // Initialize: load photos from cache then start camera
     (async () => {
       const cached = await dbLoadAllPhotos();
       if (Array.isArray(cached) && cached.length) {
