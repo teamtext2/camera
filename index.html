@@ -26,12 +26,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* Robust full-height across mobile browsers */
-      min-height: 100svh;
-      height: calc(var(--app-vh, 1vh) * 100);
+      /* Enhanced full-height handling for browser UI */
+      min-height: 100vh;
+      min-height: 100dvh; /* Dynamic viewport height */
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       overscroll-behavior: none;
+      /* Use CSS env() for safe areas */
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
+    
+    /* Adaptive container that responds to viewport changes */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      max-height: 100dvh;
+    }
+    
     #camera {
       flex: 1;
       display: flex;
@@ -40,6 +56,9 @@
       background: #000;
       width: 100%;
       position: relative;
+      min-height: 0; /* Allow flex shrinking */
+      /* Ensure camera doesn't get too small */
+      min-height: clamp(200px, 40vh, 400px);
     }
     video {
       width: 100%;
@@ -48,49 +67,54 @@
     }
     #captureBtn {
       position: absolute;
-      bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+      bottom: clamp(10px, 2vh, 20px);
       left: 50%;
       transform: translateX(-50%);
-      width: clamp(56px, 9vw, 88px);
-      height: clamp(56px, 9vw, 88px);
+      width: clamp(50px, 8vh, 80px);
+      height: clamp(50px, 8vh, 80px);
       border-radius: 50%;
-      border: clamp(3px, 0.8vw, 6px) solid #fff;
+      border: clamp(2px, 0.5vh, 5px) solid #fff;
       background: #ff3b30;
       box-shadow: 0 0 15px rgba(255, 59, 48, 0.8);
+      z-index: 10;
     }
     #toolbar {
       display: flex;
       justify-content: space-around;
       align-items: center;
       background: #222;
-      padding: clamp(6px, 1.5vh, 10px);
+      padding: clamp(4px, 1vh, 8px);
       width: 100%;
+      flex-shrink: 0; /* Don't shrink toolbar */
+      min-height: clamp(40px, 6vh, 60px);
     }
     .tool-btn {
       background: none;
       border: none;
       color: #fff;
-      font-size: clamp(18px, 2.6vw, 24px);
+      font-size: clamp(14px, 2vh, 20px);
       cursor: pointer;
-      padding: 6px 8px;
+      padding: clamp(4px, 0.8vh, 8px);
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
     #gallery {
       background: #111;
       width: 100%;
-      padding: 8px;
+      padding: clamp(4px, 0.8vh, 8px);
       display: flex;
-      gap: 8px;
+      gap: clamp(4px, 0.8vh, 8px);
       overflow-x: auto;
       scrollbar-width: none;
+      flex-shrink: 0;
+      max-height: clamp(60px, 12vh, 120px);
     }
     #gallery::-webkit-scrollbar { display: none; }
     .thumb-item {
       position: relative;
       flex: 0 0 auto;
-      width: clamp(64px, 12vw, 110px);
-      height: clamp(64px, 12vw, 110px);
+      width: clamp(50px, 10vh, 100px);
+      height: clamp(50px, 10vh, 100px);
     }
     .thumb {
       width: 100%;
@@ -111,8 +135,8 @@
       background: rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
-      font-size: 12px;
-      padding: 3px 6px;
+      font-size: clamp(10px, 1.8vh, 12px);
+      padding: clamp(2px, 0.4vh, 4px) clamp(4px, 0.8vh, 6px);
       border-radius: 6px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -211,17 +235,125 @@
       padding-top: 12px;
     }
 
-    /* Responsive tweaks for landscape / small heights */
-    @media (orientation: landscape) and (max-height: 520px) {
-      #toolbar { padding: 6px; }
-      .tool-btn { font-size: clamp(16px, 2.2vw, 20px); }
+    /* Enhanced responsive breakpoints */
+    @media (max-height: 600px) {
+      #camera { min-height: clamp(150px, 35vh, 300px); }
+      #toolbar { min-height: clamp(35px, 5vh, 50px); }
+      #gallery { max-height: clamp(50px, 10vh, 100px); }
+      .thumb-item {
+        width: clamp(45px, 9vh, 85px);
+        height: clamp(45px, 9vh, 85px);
+      }
       #captureBtn {
-        width: clamp(48px, 8vh, 70px);
-        height: clamp(48px, 8vh, 70px);
+        width: clamp(45px, 7vh, 70px);
+        height: clamp(45px, 7vh, 70px);
+      }
+    }
+    
+    @media (max-height: 500px) {
+      #camera { min-height: clamp(120px, 30vh, 250px); }
+      #toolbar { 
+        min-height: clamp(30px, 4vh, 45px);
+        padding: clamp(2px, 0.5vh, 6px);
+      }
+      #gallery { 
+        max-height: clamp(40px, 8vh, 80px);
+        padding: clamp(2px, 0.5vh, 6px);
       }
       .thumb-item {
-        width: clamp(56px, 10vh, 90px);
-        height: clamp(56px, 10vh, 90px);
+        width: clamp(40px, 8vh, 70px);
+        height: clamp(40px, 8vh, 70px);
+      }
+      #captureBtn {
+        width: clamp(40px, 6vh, 60px);
+        height: clamp(40px, 6vh, 60px);
+        bottom: clamp(8px, 1.5vh, 15px);
+      }
+      .tool-btn { 
+        font-size: clamp(12px, 1.8vh, 18px);
+        padding: clamp(3px, 0.6vh, 6px);
+      }
+    }
+    
+    @media (max-height: 400px) {
+      #camera { min-height: clamp(100px, 25vh, 200px); }
+      #toolbar { 
+        min-height: clamp(25px, 3vh, 40px);
+        padding: clamp(1px, 0.3vh, 4px);
+      }
+      #gallery { 
+        max-height: clamp(35px, 7vh, 70px);
+        padding: clamp(1px, 0.3vh, 4px);
+      }
+      .thumb-item {
+        width: clamp(35px, 7vh, 60px);
+        height: clamp(35px, 7vh, 60px);
+      }
+      #captureBtn {
+        width: clamp(35px, 5vh, 55px);
+        height: clamp(35px, 5vh, 55px);
+        bottom: clamp(5px, 1vh, 10px);
+      }
+      .tool-btn { 
+        font-size: clamp(10px, 1.5vh, 16px);
+        padding: clamp(2px, 0.4vh, 5px);
+      }
+      .mini-btn {
+        font-size: clamp(8px, 1.5vh, 10px);
+        padding: clamp(1px, 0.2vh, 3px) clamp(3px, 0.5vh, 5px);
+      }
+    }
+
+    /* Responsive tweaks for landscape / small heights */
+    @media (orientation: landscape) and (max-height: 520px) {
+      body { 
+        padding-top: max(env(safe-area-inset-top, 0px), 5px);
+        padding-bottom: max(env(safe-area-inset-bottom, 0px), 5px);
+      }
+      #camera { min-height: clamp(120px, 30vh, 300px); }
+      #toolbar { 
+        padding: clamp(3px, 0.6vh, 8px);
+        min-height: clamp(30px, 4vh, 50px);
+      }
+      .tool-btn { font-size: clamp(14px, 2vh, 18px); }
+      #captureBtn {
+        width: clamp(40px, 6vh, 65px);
+        height: clamp(40px, 6vh, 65px);
+        bottom: clamp(8px, 1.5vh, 15px);
+      }
+      .thumb-item {
+        width: clamp(45px, 8vh, 80px);
+        height: clamp(45px, 8vh, 80px);
+      }
+      #gallery { 
+        max-height: clamp(45px, 9vh, 90px);
+        padding: clamp(3px, 0.6vh, 8px);
+      }
+    }
+    
+    /* Ultra-compact mode for very constrained spaces */
+    @media (orientation: landscape) and (max-height: 400px) {
+      #camera { min-height: clamp(80px, 25vh, 200px); }
+      #toolbar { 
+        padding: clamp(2px, 0.4vh, 6px);
+        min-height: clamp(25px, 3vh, 40px);
+      }
+      .tool-btn { 
+        font-size: clamp(12px, 1.8vh, 16px);
+        padding: clamp(2px, 0.4vh, 6px);
+      }
+      #captureBtn {
+        width: clamp(35px, 5vh, 55px);
+        height: clamp(35px, 5vh, 55px);
+        bottom: clamp(5px, 1vh, 10px);
+      }
+      .thumb-item {
+        width: clamp(35px, 7vh, 70px);
+        height: clamp(35px, 7vh, 70px);
+      }
+      #gallery { 
+        max-height: clamp(35px, 8vh, 80px);
+        padding: clamp(2px, 0.4vh, 6px);
       }
     }
     /* iOS-style button */
