@@ -427,7 +427,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title">Photo Library</div>
-        <button class="close-btn ios-btn" data-close-lib aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="downloadAllBtn" class="btn primary ios-btn" title="Download all photos" style="padding: 6px 12px; font-size: 14px;">
+            <iconify-icon icon="ion:download-outline"></iconify-icon><span>Download All</span>
+          </button>
+          <button class="close-btn ios-btn" data-close-lib aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+        </div>
       </div>
       <div class="modal-body">
         <div id="libraryGrid" class="lib-grid"></div>
@@ -753,6 +758,36 @@
     });
     deletePreviewBtn.addEventListener('click', () => {
       if (activePhotoId) deletePhoto(activePhotoId);
+    });
+
+    // Download All functionality
+    document.getElementById('downloadAllBtn').addEventListener('click', () => {
+      if (photos.length === 0) {
+        alert('Không có ảnh nào để tải xuống.');
+        return;
+      }
+      
+      // Create a confirmation dialog
+      if (!confirm(`Bạn có muốn tải xuống tất cả ${photos.length} ảnh không?`)) {
+        return;
+      }
+      
+      // Download each photo with a small delay to avoid overwhelming the browser
+      photos.forEach((photo, index) => {
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = photo.dataUrl;
+          a.download = photo.filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }, index * 100); // 100ms delay between each download
+      });
+      
+      // Show success message
+      setTimeout(() => {
+        alert(`Đã bắt đầu tải xuống ${photos.length} ảnh.`);
+      }, 200);
     });
 
     // Initialize: load photos from cache then start camera
