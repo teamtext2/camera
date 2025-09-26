@@ -99,50 +99,6 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
-    #gallery {
-      background: #111;
-      width: 100%;
-      padding: clamp(4px, 0.8vh, 8px);
-      display: flex;
-      gap: clamp(4px, 0.8vh, 8px);
-      overflow-x: auto;
-      scrollbar-width: none;
-      flex-shrink: 0;
-      max-height: clamp(60px, 12vh, 120px);
-    }
-    #gallery::-webkit-scrollbar { display: none; }
-    .thumb-item {
-      position: relative;
-      flex: 0 0 auto;
-      width: clamp(50px, 10vh, 100px);
-      height: clamp(50px, 10vh, 100px);
-    }
-    .thumb {
-      width: 100%;
-      height: 100%;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 2px solid #333;
-      display: block;
-    }
-    .thumb-actions {
-      position: absolute;
-      right: 4px;
-      bottom: 4px;
-      display: flex;
-      gap: 4px;
-    }
-    .mini-btn {
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: clamp(10px, 1.8vh, 12px);
-      padding: clamp(2px, 0.4vh, 4px) clamp(4px, 0.8vh, 6px);
-      border-radius: 6px;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
     /* Modal base */
     .modal {
       position: fixed;
@@ -456,7 +412,6 @@
 
   <div id="toolbar">
     <button class="tool-btn ios-btn" id="switchCam" aria-label="Switch camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="flash" aria-label="Flash"><iconify-icon icon="ion:flash-outline"></iconify-icon></button>
     <button class="tool-btn ios-btn" id="settings" aria-label="Settings"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
     <button class="tool-btn ios-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false"></button>
     <button class="tool-btn ios-btn" id="openLibrary" title="View library" aria-label="Library"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
@@ -466,8 +421,6 @@
   <div id="settingsMenu" role="menu" aria-hidden="true">
     <button id="btnReloadAssets" class="btn ios-btn menu-item"><iconify-icon icon="ion:refresh-outline"></iconify-icon><span>Update</span></button>
   </div>
-
-  <div id="gallery"></div>
 
   <!-- Library Modal -->
   <div id="libraryModal" class="modal" aria-hidden="true">
@@ -514,7 +467,6 @@
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
-    const gallery = document.getElementById('gallery');
     const openLibraryBtn = document.getElementById('openLibrary');
     const autoSaveToggle = document.getElementById('autoSaveToggle');
     const settingsBtn = document.getElementById('settings');
@@ -674,45 +626,8 @@
     }
 
     function renderThumbRow() {
-      gallery.innerHTML = '';
-      photos.forEach((p) => {
-        const item = document.createElement('div');
-        item.className = 'thumb-item';
-        item.dataset.id = p.id;
-
-        const img = document.createElement('img');
-        img.src = p.dataUrl;
-        img.className = 'thumb';
-        img.alt = p.filename;
-        img.addEventListener('click', () => openPreview(p.id));
-
-        const actions = document.createElement('div');
-        actions.className = 'thumb-actions';
-
-        const dl = document.createElement('button');
-        dl.className = 'mini-btn ios-btn';
-        dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
-        dl.title = 'Download';
-        dl.addEventListener('click', (e) => {
-          e.stopPropagation();
-          downloadPhoto(p.id);
-        });
-
-        const del = document.createElement('button');
-        del.className = 'mini-btn ios-btn';
-        del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
-        del.title = 'Delete';
-        del.addEventListener('click', (e) => {
-          e.stopPropagation();
-          deletePhoto(p.id);
-        });
-
-        actions.appendChild(dl);
-        actions.appendChild(del);
-        item.appendChild(img);
-        item.appendChild(actions);
-        gallery.appendChild(item);
-      });
+      // This function is no longer needed as gallery is removed.
+      // The photo display is now handled by the preview modal.
     }
 
     function openLibrary() {
