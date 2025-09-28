@@ -78,6 +78,39 @@
       background: #ff3b30;
       box-shadow: 0 0 15px rgba(255, 59, 48, 0.8);
       z-index: 10;
+      transition: all 0.3s ease;
+    }
+    #captureBtn.recording {
+      background: #ff3b30;
+      animation: pulse 1.5s infinite;
+    }
+    #captureBtn.video-mode {
+      border-radius: 20%;
+      background: #ff3b30;
+    }
+    #captureBtn.video-mode.recording {
+      background: #ff3b30;
+      border-radius: 20%;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px rgba(255, 59, 48, 0.8); }
+      50% { box-shadow: 0 0 25px rgba(255, 59, 48, 1); }
+      100% { box-shadow: 0 0 15px rgba(255, 59, 48, 0.8); }
+    }
+    #recordingTimer {
+      position: absolute;
+      top: clamp(10px, 2vh, 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #ff3b30;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: monospace;
+      font-size: clamp(14px, 2vh, 18px);
+      font-weight: bold;
+      z-index: 10;
+      display: none;
     }
     #toolbar {
       display: flex;
@@ -408,10 +441,12 @@
   <div id="camera">
     <video id="video" autoplay playsinline muted></video>
     <button id="captureBtn"></button>
+    <div id="recordingTimer">00:00</div>
   </div>
 
   <div id="toolbar">
     <button class="tool-btn ios-btn" id="switchCam" aria-label="Switch camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
+    <button class="tool-btn ios-btn" id="modeToggle" aria-label="Switch mode" title="Switch between photo and video"><iconify-icon icon="ion:camera-outline"></iconify-icon><span id="modeText">Photo</span></button>
     <button class="tool-btn ios-btn" id="settings" aria-label="Settings"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
     <button class="tool-btn ios-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false"></button>
     <button class="tool-btn ios-btn" id="openLibrary" title="View library" aria-label="Library"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
@@ -483,16 +518,27 @@
     const previewImage = document.getElementById('previewImage');
     const downloadPreviewBtn = document.getElementById('downloadPreview');
     const deletePreviewBtn = document.getElementById('deletePreview');
+    const modeToggle = document.getElementById('modeToggle');
+    const modeText = document.getElementById('modeText');
+    const recordingTimer = document.getElementById('recordingTimer');
     let currentStream;
     let useFront = true;
     let photos = [];
+    let videos = [];
     let activePhotoId = null;
+    let activeVideoId = null;
     let autoSave = true;
+    let currentMode = 'photo'; // 'photo' or 'video'
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let recordingStartTime = null;
+    let recordingInterval = null;
 
     // ===== IndexedDB persistence =====
     const DB_NAME = 'camera-db';
-    const DB_VERSION = 1;
+    const DB_VERSION = 2;
     const STORE_PHOTOS = 'photos';
+    const STORE_VIDEOS = 'videos';
 
     function openDb() {
       return new Promise((resolve, reject) => {
@@ -501,6 +547,10 @@
           const db = req.result;
           if (!db.objectStoreNames.contains(STORE_PHOTOS)) {
             const store = db.createObjectStore(STORE_PHOTOS, { keyPath: 'id' });
+            store.createIndex('createdAt', 'createdAt');
+          }
+          if (!db.objectStoreNames.contains(STORE_VIDEOS)) {
+            const store = db.createObjectStore(STORE_VIDEOS, { keyPath: 'id' });
             store.createIndex('createdAt', 'createdAt');
           }
         };
@@ -557,6 +607,54 @@
       }
     }
 
+    async function dbSaveVideo(video) {
+      try {
+        const db = await openDb();
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction(STORE_VIDEOS, 'readwrite');
+          tx.objectStore(STORE_VIDEOS).put(video);
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (e) {
+        console.error('Error saving video to cache', e);
+      }
+    }
+
+    async function dbDeleteVideo(id) {
+      try {
+        const db = await openDb();
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction(STORE_VIDEOS, 'readwrite');
+          tx.objectStore(STORE_VIDEOS).delete(id);
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (e) {
+        console.error('Error deleting video from cache', e);
+      }
+    }
+
+    async function dbLoadAllVideos() {
+      try {
+        const db = await openDb();
+        return await new Promise((resolve, reject) => {
+          const tx = db.transaction(STORE_VIDEOS, 'readonly');
+          const req = tx.objectStore(STORE_VIDEOS).getAll();
+          req.onsuccess = () => {
+            const list = req.result || [];
+            // Sort newest first
+            list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            resolve(list);
+          };
+          req.onerror = () => reject(req.error);
+        });
+      } catch (e) {
+        console.error('Error loading videos from cache', e);
+        return [];
+      }
+    }
+
     async function initCamera() {
       if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
@@ -593,6 +691,14 @@
     }
 
     captureBtn.onclick = () => {
+      if (currentMode === 'photo') {
+        capturePhoto();
+      } else {
+        toggleVideoRecording();
+      }
+    };
+
+    function capturePhoto() {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext('2d');
@@ -609,7 +715,70 @@
       if (autoSave && photo) {
         downloadPhoto(photo.id);
       }
-    };
+    }
+
+    function toggleVideoRecording() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        stopVideoRecording();
+      } else {
+        startVideoRecording();
+      }
+    }
+
+    function startVideoRecording() {
+      if (!currentStream) return;
+      
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(currentStream, {
+        mimeType: 'video/webm;codecs=vp9'
+      });
+      
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          recordedChunks.push(event.data);
+        }
+      };
+      
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const video = addVideo(blob);
+        if (autoSave && video) {
+          downloadVideo(video.id);
+        }
+      };
+      
+      mediaRecorder.start();
+      recordingStartTime = Date.now();
+      recordingInterval = setInterval(updateRecordingTimer, 1000);
+      
+      // Update UI
+      captureBtn.classList.add('recording');
+      recordingTimer.style.display = 'block';
+      updateRecordingTimer();
+    }
+
+    function stopVideoRecording() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+      
+      // Update UI
+      captureBtn.classList.remove('recording');
+      recordingTimer.style.display = 'none';
+      if (recordingInterval) {
+        clearInterval(recordingInterval);
+        recordingInterval = null;
+      }
+    }
+
+    function updateRecordingTimer() {
+      if (recordingStartTime) {
+        const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        recordingTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }
 
     // Reinitialize camera on orientation change for better aspect match
     window.addEventListener('orientationchange', () => {
@@ -630,6 +799,21 @@
       return photo;
     }
 
+    function addVideo(blob) {
+      const id = 'v_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      const index = videos.length + 1;
+      const filename = `video_${index}.webm`;
+      const createdAt = Date.now();
+      const videoUrl = URL.createObjectURL(blob);
+      const video = { id, blob, videoUrl, filename, createdAt };
+      videos.unshift(video);
+      renderThumbRow();
+      if (libraryModal.classList.contains('show')) renderLibrary();
+      // Save to IndexedDB for offline cache
+      dbSaveVideo(video);
+      return video;
+    }
+
     function renderThumbRow() {
       // This function is no longer needed as gallery is removed.
       // The photo display is now handled by the preview modal.
@@ -648,16 +832,35 @@
 
     function renderLibrary() {
       libraryGrid.innerHTML = '';
-      photos.forEach((p) => {
+      
+      // Combine photos and videos, sort by creation date
+      const allMedia = [
+        ...photos.map(p => ({ ...p, type: 'photo' })),
+        ...videos.map(v => ({ ...v, type: 'video' }))
+      ].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      allMedia.forEach((media) => {
         const item = document.createElement('div');
         item.className = 'lib-item';
-        item.dataset.id = p.id;
+        item.dataset.id = media.id;
+        item.dataset.type = media.type;
 
-        const img = document.createElement('img');
-        img.src = p.dataUrl;
-        img.className = 'lib-thumb';
-        img.alt = p.filename;
-        img.addEventListener('click', () => openPreview(p.id));
+        let thumb;
+        if (media.type === 'photo') {
+          thumb = document.createElement('img');
+          thumb.src = media.dataUrl;
+          thumb.className = 'lib-thumb';
+          thumb.alt = media.filename;
+        } else {
+          thumb = document.createElement('video');
+          thumb.src = media.videoUrl;
+          thumb.className = 'lib-thumb';
+          thumb.alt = media.filename;
+          thumb.muted = true;
+          thumb.preload = 'metadata';
+        }
+        
+        thumb.addEventListener('click', () => openPreview(media.id, media.type));
 
         const actions = document.createElement('div');
         actions.className = 'lib-actions';
@@ -667,7 +870,11 @@
         dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
         dl.addEventListener('click', (e) => {
           e.stopPropagation();
-          downloadPhoto(p.id);
+          if (media.type === 'photo') {
+            downloadPhoto(media.id);
+          } else {
+            downloadVideo(media.id);
+          }
         });
 
         const del = document.createElement('button');
@@ -675,23 +882,64 @@
         del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
         del.addEventListener('click', (e) => {
           e.stopPropagation();
-          deletePhoto(p.id);
+          if (media.type === 'photo') {
+            deletePhoto(media.id);
+          } else {
+            deleteVideo(media.id);
+          }
         });
 
         actions.appendChild(dl);
         actions.appendChild(del);
-        item.appendChild(img);
+        item.appendChild(thumb);
         item.appendChild(actions);
         libraryGrid.appendChild(item);
       });
     }
 
-    function openPreview(photoId) {
-      const photo = photos.find(x => x.id === photoId);
-      if (!photo) return;
-      activePhotoId = photoId;
-      previewImage.src = photo.dataUrl;
-      previewImage.alt = photo.filename;
+    function openPreview(mediaId, mediaType) {
+      let media;
+      if (mediaType === 'photo') {
+        media = photos.find(x => x.id === mediaId);
+        activePhotoId = mediaId;
+        activeVideoId = null;
+      } else {
+        media = videos.find(x => x.id === mediaId);
+        activeVideoId = mediaId;
+        activePhotoId = null;
+      }
+      
+      if (!media) return;
+      
+      // Update modal title
+      const modalTitle = document.querySelector('#previewModal .modal-title');
+      modalTitle.textContent = mediaType === 'photo' ? 'View Photo' : 'View Video';
+      
+      // Update preview content
+      if (mediaType === 'photo') {
+        previewImage.src = media.dataUrl;
+        previewImage.alt = media.filename;
+        previewImage.style.display = 'block';
+        // Hide video element if it exists
+        const previewVideo = document.getElementById('previewVideo');
+        if (previewVideo) {
+          previewVideo.style.display = 'none';
+        }
+      } else {
+        // Create video element if it doesn't exist
+        let previewVideo = document.getElementById('previewVideo');
+        if (!previewVideo) {
+          previewVideo = document.createElement('video');
+          previewVideo.id = 'previewVideo';
+          previewVideo.className = 'preview-image';
+          previewVideo.controls = true;
+          previewImage.parentNode.insertBefore(previewVideo, previewImage);
+        }
+        previewVideo.src = media.videoUrl;
+        previewVideo.style.display = 'block';
+        previewImage.style.display = 'none';
+      }
+      
       previewModal.classList.add('show');
       previewModal.setAttribute('aria-hidden', 'false');
     }
@@ -700,6 +948,7 @@
       previewModal.classList.remove('show');
       previewModal.setAttribute('aria-hidden', 'true');
       activePhotoId = null;
+      activeVideoId = null;
     }
 
     function downloadPhoto(photoId) {
@@ -708,6 +957,17 @@
       const a = document.createElement('a');
       a.href = photo.dataUrl;
       a.download = photo.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function downloadVideo(videoId) {
+      const video = videos.find(x => x.id === videoId);
+      if (!video) return;
+      const a = document.createElement('a');
+      a.href = video.videoUrl;
+      a.download = video.filename;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -724,10 +984,44 @@
       dbDeletePhoto(photoId);
     }
 
+    function deleteVideo(videoId) {
+      const i = videos.findIndex(x => x.id === videoId);
+      if (i === -1) return;
+      const video = videos[i];
+      URL.revokeObjectURL(video.videoUrl);
+      videos.splice(i, 1);
+      renderThumbRow();
+      if (libraryModal.classList.contains('show')) renderLibrary();
+      if (activeVideoId === videoId) closePreview();
+      // Delete from IndexedDB
+      dbDeleteVideo(videoId);
+    }
+
     document.getElementById('switchCam').onclick = () => {
       useFront = !useFront;
       initCamera();
     };
+
+    // Mode toggle functionality
+    function toggleMode() {
+      currentMode = currentMode === 'photo' ? 'video' : 'photo';
+      updateModeUI();
+    }
+
+    function updateModeUI() {
+      const icon = modeToggle.querySelector('iconify-icon');
+      if (currentMode === 'photo') {
+        modeText.textContent = 'Photo';
+        icon.setAttribute('icon', 'ion:camera-outline');
+        captureBtn.classList.remove('video-mode');
+      } else {
+        modeText.textContent = 'Video';
+        icon.setAttribute('icon', 'ion:videocam-outline');
+        captureBtn.classList.add('video-mode');
+      }
+    }
+
+    modeToggle.addEventListener('click', toggleMode);
 
     // Auto save toggle
     function updateAutoSaveBtn() {
@@ -755,22 +1049,27 @@
     // Preview actions
     downloadPreviewBtn.addEventListener('click', () => {
       if (activePhotoId) downloadPhoto(activePhotoId);
+      if (activeVideoId) downloadVideo(activeVideoId);
     });
     deletePreviewBtn.addEventListener('click', () => {
       if (activePhotoId) deletePhoto(activePhotoId);
+      if (activeVideoId) deleteVideo(activeVideoId);
     });
 
     // Download All functionality
     document.getElementById('downloadAllBtn').addEventListener('click', () => {
-      if (photos.length === 0) {
-        alert('Không có ảnh nào để tải xuống.');
+      const totalMedia = photos.length + videos.length;
+      if (totalMedia === 0) {
+        alert('Không có ảnh hoặc video nào để tải xuống.');
         return;
       }
       
       // Create a confirmation dialog
-      if (!confirm(`Bạn có muốn tải xuống tất cả ${photos.length} ảnh không?`)) {
+      if (!confirm(`Bạn có muốn tải xuống tất cả ${totalMedia} file (${photos.length} ảnh, ${videos.length} video) không?`)) {
         return;
       }
+      
+      let downloadCount = 0;
       
       // Download each photo with a small delay to avoid overwhelming the browser
       photos.forEach((photo, index) => {
@@ -781,23 +1080,48 @@
           document.body.appendChild(a);
           a.click();
           a.remove();
-        }, index * 100); // 100ms delay between each download
+          downloadCount++;
+        }, downloadCount * 100); // 100ms delay between each download
+      });
+      
+      // Download each video with a small delay
+      videos.forEach((video, index) => {
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = video.videoUrl;
+          a.download = video.filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          downloadCount++;
+        }, downloadCount * 100);
       });
       
       // Show success message
       setTimeout(() => {
-        alert(`Đã bắt đầu tải xuống ${photos.length} ảnh.`);
+        alert(`Đã bắt đầu tải xuống ${totalMedia} file.`);
       }, 200);
     });
 
-    // Initialize: load photos from cache then start camera
+    // Initialize: load photos and videos from cache then start camera
     (async () => {
-      const cached = await dbLoadAllPhotos();
-      if (Array.isArray(cached) && cached.length) {
-        photos = cached;
+      const cachedPhotos = await dbLoadAllPhotos();
+      const cachedVideos = await dbLoadAllVideos();
+      
+      if (Array.isArray(cachedPhotos) && cachedPhotos.length) {
+        photos = cachedPhotos;
+      }
+      
+      if (Array.isArray(cachedVideos) && cachedVideos.length) {
+        videos = cachedVideos;
+      }
+      
+      if (photos.length > 0 || videos.length > 0) {
         renderThumbRow();
       }
+      
       initCamera();
+      updateModeUI(); // Initialize UI state
     })();
 
     // ===== Service Worker Registration =====
