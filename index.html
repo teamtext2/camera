@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="google" content="notranslate">
   <title>Text2 - Camera</title>
 <!-- Google tag (gtag.js) - GA4 -->
@@ -30,13 +30,21 @@
       /* Enhanced full-height handling for browser UI */
       min-height: 100vh;
       min-height: 100dvh; /* Dynamic viewport height */
+      min-height: 100svh; /* Small viewport height - most reliable */
       height: 100vh;
       height: 100dvh;
+      height: 100svh;
       overflow: hidden;
       overscroll-behavior: none;
-      /* Use CSS env() for safe areas */
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      /* Enhanced safe areas with better fallbacks */
+      padding-top: max(env(safe-area-inset-top, 0px), 10px);
+      padding-bottom: max(env(safe-area-inset-bottom, 0px), 10px);
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      /* Prevent zoom on double tap */
+      touch-action: manipulation;
+      /* Ensure content is always visible */
+      position: relative;
     }
     
     /* Adaptive container that responds to viewport changes */
@@ -47,6 +55,10 @@
       height: 100%;
       max-height: 100vh;
       max-height: 100dvh;
+      max-height: 100svh;
+      /* Ensure container respects safe areas */
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
     }
     
     #camera {
@@ -58,8 +70,10 @@
       width: 100%;
       position: relative;
       min-height: 0; /* Allow flex shrinking */
-      /* Ensure camera doesn't get too small */
-      min-height: clamp(200px, 40vh, 400px);
+      /* Ensure camera doesn't get too small with better viewport units */
+      min-height: clamp(200px, 40svh, 400px);
+      /* Ensure camera area is always accessible */
+      max-height: calc(100svh - 120px); /* Reserve space for toolbar */
     }
     video {
       width: 100%;
@@ -68,17 +82,20 @@
     }
     #captureBtn {
       position: absolute;
-      bottom: clamp(10px, 2vh, 20px);
+      bottom: max(clamp(10px, 2svh, 20px), 15px); /* Ensure minimum distance from bottom */
       left: 50%;
       transform: translateX(-50%);
-      width: clamp(50px, 8vh, 80px);
-      height: clamp(50px, 8vh, 80px);
+      width: clamp(50px, 8svh, 80px);
+      height: clamp(50px, 8svh, 80px);
       border-radius: 50%;
-      border: clamp(2px, 0.5vh, 5px) solid #fff;
+      border: clamp(2px, 0.5svh, 5px) solid #fff;
       background: #ff3b30;
       box-shadow: 0 0 15px rgba(255, 59, 48, 0.8);
       z-index: 10;
       transition: all 0.3s ease;
+      /* Ensure button is always accessible */
+      min-width: 50px;
+      min-height: 50px;
     }
     #captureBtn.recording {
       background: #ff3b30;
@@ -99,38 +116,54 @@
     }
     #recordingTimer {
       position: absolute;
-      top: clamp(10px, 2vh, 20px);
+      top: max(clamp(10px, 2svh, 20px), 15px); /* Ensure minimum distance from top */
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       color: #ff3b30;
       padding: 8px 16px;
       border-radius: 20px;
       font-family: monospace;
-      font-size: clamp(14px, 2vh, 18px);
+      font-size: clamp(14px, 2svh, 18px);
       font-weight: bold;
       z-index: 10;
       display: none;
+      /* Ensure timer is always visible */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     #toolbar {
       display: flex;
       justify-content: space-around;
       align-items: center;
       background: #222;
-      padding: clamp(4px, 1vh, 8px);
+      padding: clamp(4px, 1svh, 8px);
       width: 100%;
       flex-shrink: 0; /* Don't shrink toolbar */
-      min-height: clamp(40px, 6vh, 60px);
+      min-height: clamp(40px, 6svh, 60px);
+      /* Ensure toolbar is always accessible */
+      position: relative;
+      z-index: 5;
+      /* Add safe area padding */
+      padding-left: max(clamp(4px, 1svh, 8px), env(safe-area-inset-left, 0px));
+      padding-right: max(clamp(4px, 1svh, 8px), env(safe-area-inset-right, 0px));
+      padding-bottom: max(clamp(4px, 1svh, 8px), env(safe-area-inset-bottom, 0px));
     }
     .tool-btn {
       background: none;
       border: none;
       color: #fff;
-      font-size: clamp(14px, 2vh, 20px);
+      font-size: clamp(14px, 2svh, 20px);
       cursor: pointer;
-      padding: clamp(4px, 0.8vh, 8px);
+      padding: clamp(4px, 0.8svh, 8px);
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      /* Ensure buttons are always tappable */
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     /* Modal base */
     .modal {
@@ -227,70 +260,72 @@
 
     /* Enhanced responsive breakpoints */
     @media (max-height: 600px) {
-      #camera { min-height: clamp(150px, 35vh, 300px); }
-      #toolbar { min-height: clamp(35px, 5vh, 50px); }
-      #gallery { max-height: clamp(50px, 10vh, 100px); }
-      .thumb-item {
-        width: clamp(45px, 9vh, 85px);
-        height: clamp(45px, 9vh, 85px);
+      #camera { 
+        min-height: clamp(150px, 35svh, 300px);
+        max-height: calc(100svh - 100px); /* More space for toolbar */
+      }
+      #toolbar { 
+        min-height: clamp(35px, 5svh, 50px);
+        padding: clamp(3px, 0.8svh, 6px);
       }
       #captureBtn {
-        width: clamp(45px, 7vh, 70px);
-        height: clamp(45px, 7vh, 70px);
+        width: clamp(45px, 7svh, 70px);
+        height: clamp(45px, 7svh, 70px);
+        bottom: max(clamp(8px, 1.5svh, 15px), 12px);
+      }
+      .tool-btn {
+        font-size: clamp(12px, 1.8svh, 18px);
+        padding: clamp(3px, 0.6svh, 6px);
       }
     }
     
     @media (max-height: 500px) {
-      #camera { min-height: clamp(120px, 30vh, 250px); }
+      #camera { 
+        min-height: clamp(120px, 30svh, 250px);
+        max-height: calc(100svh - 80px); /* Reserve more space for toolbar */
+      }
       #toolbar { 
-        min-height: clamp(30px, 4vh, 45px);
-        padding: clamp(2px, 0.5vh, 6px);
-      }
-      #gallery { 
-        max-height: clamp(40px, 8vh, 80px);
-        padding: clamp(2px, 0.5vh, 6px);
-      }
-      .thumb-item {
-        width: clamp(40px, 8vh, 70px);
-        height: clamp(40px, 8vh, 70px);
+        min-height: clamp(30px, 4svh, 45px);
+        padding: clamp(2px, 0.5svh, 6px);
       }
       #captureBtn {
-        width: clamp(40px, 6vh, 60px);
-        height: clamp(40px, 6vh, 60px);
-        bottom: clamp(8px, 1.5vh, 15px);
+        width: clamp(40px, 6svh, 60px);
+        height: clamp(40px, 6svh, 60px);
+        bottom: max(clamp(8px, 1.5svh, 15px), 10px);
       }
       .tool-btn { 
-        font-size: clamp(12px, 1.8vh, 18px);
-        padding: clamp(3px, 0.6vh, 6px);
+        font-size: clamp(12px, 1.8svh, 18px);
+        padding: clamp(3px, 0.6svh, 6px);
+        min-width: 40px;
+        min-height: 40px;
       }
     }
     
     @media (max-height: 400px) {
-      #camera { min-height: clamp(100px, 25vh, 200px); }
+      #camera { 
+        min-height: clamp(100px, 25svh, 200px);
+        max-height: calc(100svh - 60px); /* Minimal space for toolbar */
+      }
       #toolbar { 
-        min-height: clamp(25px, 3vh, 40px);
-        padding: clamp(1px, 0.3vh, 4px);
-      }
-      #gallery { 
-        max-height: clamp(35px, 7vh, 70px);
-        padding: clamp(1px, 0.3vh, 4px);
-      }
-      .thumb-item {
-        width: clamp(35px, 7vh, 60px);
-        height: clamp(35px, 7vh, 60px);
+        min-height: clamp(25px, 3svh, 40px);
+        padding: clamp(1px, 0.3svh, 4px);
       }
       #captureBtn {
-        width: clamp(35px, 5vh, 55px);
-        height: clamp(35px, 5vh, 55px);
-        bottom: clamp(5px, 1vh, 10px);
+        width: clamp(35px, 5svh, 55px);
+        height: clamp(35px, 5svh, 55px);
+        bottom: max(clamp(5px, 1svh, 10px), 8px);
       }
       .tool-btn { 
-        font-size: clamp(10px, 1.5vh, 16px);
-        padding: clamp(2px, 0.4vh, 5px);
+        font-size: clamp(10px, 1.5svh, 16px);
+        padding: clamp(2px, 0.4svh, 5px);
+        min-width: 36px;
+        min-height: 36px;
       }
       .mini-btn {
-        font-size: clamp(8px, 1.5vh, 10px);
-        padding: clamp(1px, 0.2vh, 3px) clamp(3px, 0.5vh, 5px);
+        font-size: clamp(8px, 1.5svh, 10px);
+        padding: clamp(1px, 0.2svh, 3px) clamp(3px, 0.5svh, 5px);
+        min-width: 32px;
+        min-height: 32px;
       }
     }
 
@@ -300,50 +335,46 @@
         padding-top: max(env(safe-area-inset-top, 0px), 5px);
         padding-bottom: max(env(safe-area-inset-bottom, 0px), 5px);
       }
-      #camera { min-height: clamp(120px, 30vh, 300px); }
+      #camera { 
+        min-height: clamp(120px, 30svh, 300px);
+        max-height: calc(100svh - 70px);
+      }
       #toolbar { 
-        padding: clamp(3px, 0.6vh, 8px);
-        min-height: clamp(30px, 4vh, 50px);
+        padding: clamp(3px, 0.6svh, 8px);
+        min-height: clamp(30px, 4svh, 50px);
       }
-      .tool-btn { font-size: clamp(14px, 2vh, 18px); }
+      .tool-btn { 
+        font-size: clamp(14px, 2svh, 18px);
+        min-width: 42px;
+        min-height: 42px;
+      }
       #captureBtn {
-        width: clamp(40px, 6vh, 65px);
-        height: clamp(40px, 6vh, 65px);
-        bottom: clamp(8px, 1.5vh, 15px);
-      }
-      .thumb-item {
-        width: clamp(45px, 8vh, 80px);
-        height: clamp(45px, 8vh, 80px);
-      }
-      #gallery { 
-        max-height: clamp(45px, 9vh, 90px);
-        padding: clamp(3px, 0.6vh, 8px);
+        width: clamp(40px, 6svh, 65px);
+        height: clamp(40px, 6svh, 65px);
+        bottom: max(clamp(8px, 1.5svh, 15px), 12px);
       }
     }
     
     /* Ultra-compact mode for very constrained spaces */
     @media (orientation: landscape) and (max-height: 400px) {
-      #camera { min-height: clamp(80px, 25vh, 200px); }
+      #camera { 
+        min-height: clamp(80px, 25svh, 200px);
+        max-height: calc(100svh - 50px);
+      }
       #toolbar { 
-        padding: clamp(2px, 0.4vh, 6px);
-        min-height: clamp(25px, 3vh, 40px);
+        padding: clamp(2px, 0.4svh, 6px);
+        min-height: clamp(25px, 3svh, 40px);
       }
       .tool-btn { 
-        font-size: clamp(12px, 1.8vh, 16px);
-        padding: clamp(2px, 0.4vh, 6px);
+        font-size: clamp(12px, 1.8svh, 16px);
+        padding: clamp(2px, 0.4svh, 6px);
+        min-width: 38px;
+        min-height: 38px;
       }
       #captureBtn {
-        width: clamp(35px, 5vh, 55px);
-        height: clamp(35px, 5vh, 55px);
-        bottom: clamp(5px, 1vh, 10px);
-      }
-      .thumb-item {
-        width: clamp(35px, 7vh, 70px);
-        height: clamp(35px, 7vh, 70px);
-      }
-      #gallery { 
-        max-height: clamp(35px, 8vh, 80px);
-        padding: clamp(2px, 0.4vh, 6px);
+        width: clamp(35px, 5svh, 55px);
+        height: clamp(35px, 5svh, 55px);
+        bottom: max(clamp(5px, 1svh, 10px), 8px);
       }
     }
     /* iOS-style button */
@@ -434,6 +465,46 @@
     }
     #settingsMenu.show { display: block; }
     #settingsMenu .menu-item { margin: 4px 0; }
+    
+    /* Additional mobile optimizations */
+    @supports (height: 100svh) {
+      body {
+        height: 100svh;
+        min-height: 100svh;
+      }
+      .app-container {
+        height: 100svh;
+        max-height: 100svh;
+      }
+    }
+    
+    /* Fallback for older browsers */
+    @supports not (height: 100svh) {
+      body {
+        height: 100vh;
+        min-height: 100vh;
+      }
+      .app-container {
+        height: 100vh;
+        max-height: 100vh;
+      }
+    }
+    
+    /* Prevent iOS Safari bounce */
+    body {
+      -webkit-overflow-scrolling: touch;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Ensure touch targets are accessible */
+    @media (pointer: coarse) {
+      .tool-btn, #captureBtn {
+        min-width: 44px;
+        min-height: 44px;
+      }
+    }
   </style>
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
@@ -495,14 +566,32 @@
   <canvas id="canvas" style="display:none;"></canvas>
 
   <script>
-    // Viewport height fix for mobile browsers UI chrome
+    // Enhanced viewport height handling for mobile browsers
     function setAppVhUnit() {
       const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const svh = window.innerHeight; // Small viewport height
+      const dvh = window.innerHeight; // Dynamic viewport height
+      
       document.documentElement.style.setProperty('--app-vh', `${vh * 0.01}px`);
+      document.documentElement.style.setProperty('--app-svh', `${svh * 0.01}px`);
+      document.documentElement.style.setProperty('--app-dvh', `${dvh * 0.01}px`);
+      
+      // Update body padding to ensure content is always visible
+      const safeTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top') || '0');
+      const safeBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom') || '0');
+      
+      document.body.style.paddingTop = `${Math.max(safeTop, 10)}px`;
+      document.body.style.paddingBottom = `${Math.max(safeBottom, 10)}px`;
     }
+    
     setAppVhUnit();
     window.addEventListener('resize', setAppVhUnit, { passive: true });
     window.addEventListener('orientationchange', setAppVhUnit, { passive: true });
+    
+    // Handle visual viewport changes (keyboard, browser UI)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', setAppVhUnit, { passive: true });
+    }
 
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
