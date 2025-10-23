@@ -2,597 +2,340 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Optimize viewport for all devices, prevent zoom -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="google" content="notranslate">
-  <title>Text2 - Camera</title>
-<!-- Google tag (gtag.js) - GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEFG123"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  
+  <!-- SEO Meta Tags -->
+  <title>Text2 Camera</title>
+  <meta name="description" content="Online photo and video capture app with webcam. Modern interface, easy to use, supports high-quality photos and HD video recording.">
+  <meta name="keywords" content="online photo capture, online video recording, webcam, camera app">
+  <meta name="author" content="Text2">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://camera.text2.click/">
+  <meta property="og:title" content="Text2 Camera - Online Photo & Video Capture App">
+  <meta property="og:description" content="Online photo and video capture app with webcam. Modern interface, easy to use.">
+  <meta property="og:site_name" content="Text2">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:url" content="https://camera.text2.click/">
+  <meta property="twitter:title" content="Text2 Camera - Online Photo & Video Capture App">
+  <meta property="twitter:description" content="Online photo and video capture app with webcam. Modern interface, easy to use.">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#000000">
+  <meta name="application-name" content="Text2 Camera">
+  <meta name="apple-mobile-web-app-title" content="Text2 Camera">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Alternate Languages -->
+  <link rel="alternate" hreflang="en" href="https://camera.text2.click/">
+  <link rel="alternate" hreflang="x-default" href="https://camera.text2.click/">
 
-  gtag('config', 'G-6J85STMJ14');
-</script>
+  <!-- Google tag (gtag.js) - GA4 (Using boss's code) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6J85STMJ14"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6J85STMJ14');
+  </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1722731267767270"
+crossorigin="anonymous"></script> 
+  <!-- Favicons (Using boss's paths) -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://code.iconify.design">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  
+  <!-- Load Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Load Iconify Icons -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  
+  <!-- Load Inter font (modern UI standard) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Structured Data - WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text2 Camera",
+    "description": "Free online photo and video capture app with high quality",
+    "url": "https://camera.text2.click/",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Text2"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Text2"
+    },
+    "inLanguage": "en",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "softwareVersion": "1.0",
+    "featureList": [
+      "High-quality photo capture",
+      "HD video recording",
+      "Local storage",
+      "Responsive interface",
+      "Front/rear camera support",
+      "Automatic download"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Text2",
+    "url": "https://camera.text2.click/",
+    "logo": "https://camera.text2.click/favicon-32x32.png",
+    "sameAs": []
+  }
+  </script>
+  
   <style>
+    /* Custom CSS tweaks */
     body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      /* Enhanced full-height handling for browser UI */
-      min-height: 100vh;
-      min-height: 100dvh; /* Dynamic viewport height */
-      min-height: 100svh; /* Small viewport height - most reliable */
-      height: 100vh;
-      height: 100dvh;
+      font-family: 'Inter', sans-serif;
+      /* Prevent page scrolling, double-tap zoom */
+      overscroll-behavior: none;
+      touch-action: manipulation;
+      /* Ensure full height on mobile, even when browser bars hide/show */
+      height: 100vh; /* Fallback */
       height: 100svh;
       overflow: hidden;
-      overscroll-behavior: none;
-      /* Enhanced safe areas with better fallbacks */
-      padding-top: max(env(safe-area-inset-top, 0px), 10px);
-      padding-bottom: max(env(safe-area-inset-bottom, 0px), 10px);
-      padding-left: env(safe-area-inset-left, 0px);
-      padding-right: env(safe-area-inset-right, 0px);
-      /* Prevent zoom on double tap */
-      touch-action: manipulation;
-      /* Ensure content is always visible */
-      position: relative;
+      position: fixed;
+      width: 100%;
     }
     
-    /* Adaptive container that responds to viewport changes */
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      max-height: 100vh;
-      max-height: 100dvh;
-      max-height: 100svh;
-      /* Ensure container respects safe areas */
-      padding-left: env(safe-area-inset-left, 0px);
-      padding-right: env(safe-area-inset-right, 0px);
-    }
-    
-    #camera {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      width: 100%;
-      position: relative;
-      min-height: 0; /* Allow flex shrinking */
-      /* Ensure camera doesn't get too small with better viewport units */
-      min-height: clamp(200px, 40svh, 400px);
-      /* Ensure camera area is always accessible */
-      max-height: calc(100svh - 120px); /* Reserve space for toolbar */
-    }
-    video {
+    /* Ensure video preview is always 1:1 or 4:3 etc. depending on stream */
+    #video {
+      /* Keep video fitted and covering the frame */
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    #captureBtn {
-      position: absolute;
-      bottom: max(clamp(10px, 2svh, 20px), 15px); /* Ensure minimum distance from bottom */
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(50px, 8svh, 80px);
-      height: clamp(50px, 8svh, 80px);
-      border-radius: 50%;
-      border: clamp(2px, 0.5svh, 5px) solid #fff;
-      background: #ff3b30;
-      box-shadow: 0 0 15px rgba(255, 59, 48, 0.8);
-      z-index: 10;
-      transition: all 0.3s ease;
-      /* Ensure button is always accessible */
-      min-width: 50px;
-      min-height: 50px;
-    }
-    #captureBtn.recording {
-      background: #ff3b30;
-      animation: pulse 1.5s infinite;
-    }
-    #captureBtn.video-mode {
-      border-radius: 20%;
-      background: #ff3b30;
-    }
-    #captureBtn.video-mode.recording {
-      background: #ff3b30;
-      border-radius: 20%;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 15px rgba(255, 59, 48, 0.8); }
-      50% { box-shadow: 0 0 25px rgba(255, 59, 48, 1); }
-      100% { box-shadow: 0 0 15px rgba(255, 59, 48, 0.8); }
-    }
-    #recordingTimer {
-      position: absolute;
-      top: max(clamp(10px, 2svh, 20px), 15px); /* Ensure minimum distance from top */
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: #ff3b30;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-family: monospace;
-      font-size: clamp(14px, 2svh, 18px);
-      font-weight: bold;
-      z-index: 10;
-      display: none;
-      /* Ensure timer is always visible */
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    #toolbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: #222;
-      padding: clamp(4px, 1svh, 8px);
-      width: 100%;
-      flex-shrink: 0; /* Don't shrink toolbar */
-      min-height: clamp(40px, 6svh, 60px);
-      /* Ensure toolbar is always accessible */
-      position: relative;
-      z-index: 5;
-      /* Add safe area padding */
-      padding-left: max(clamp(4px, 1svh, 8px), env(safe-area-inset-left, 0px));
-      padding-right: max(clamp(4px, 1svh, 8px), env(safe-area-inset-right, 0px));
-      padding-bottom: max(clamp(4px, 1svh, 8px), env(safe-area-inset-bottom, 0px));
-    }
-    .tool-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: clamp(14px, 2svh, 20px);
-      cursor: pointer;
-      padding: clamp(4px, 0.8svh, 8px);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      /* Ensure buttons are always tappable */
-      min-width: 44px;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* Modal base */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 16px;
-    }
-    .modal.show { display: flex; }
-    .modal-content {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 12px;
-      width: min(100%, 920px);
-      max-height: 90vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      border-bottom: 1px solid #333;
-      background: #111;
-    }
-    .modal-title { font-weight: bold; }
-    .close-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-    }
-    .modal-body { padding: 12px; overflow: auto; }
-    /* Library grid */
-    .lib-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-    }
-    .lib-item { position: relative; }
-    .lib-thumb {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid #333;
-      display: block;
-      cursor: pointer;
-    }
-    .lib-actions {
-      position: absolute;
-      right: 6px;
-      bottom: 6px;
-      display: flex;
-      gap: 6px;
-    }
-    .btn {
-      background: #2a2a2a;
-      border: 1px solid #444;
-      color: #fff;
-      border-radius: 8px;
-      padding: 8px 10px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .btn.primary { background: #0a84ff; border-color: #0a84ff; }
-    .btn.danger { background: #ff453a; border-color: #ff453a; }
-    /* Preview modal */
-    .preview-image {
-      max-width: 90vw;
-      max-height: 70dvh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 10px;
-      border: 1px solid #333;
-      display: block;
-      margin: 0 auto;
-      background: #000;
-    }
-    .preview-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      padding-top: 12px;
-    }
-
-    /* Enhanced responsive breakpoints */
-    @media (max-height: 600px) {
-      #camera { 
-        min-height: clamp(150px, 35svh, 300px);
-        max-height: calc(100svh - 100px); /* More space for toolbar */
-      }
-      #toolbar { 
-        min-height: clamp(35px, 5svh, 50px);
-        padding: clamp(3px, 0.8svh, 6px);
-      }
-      #captureBtn {
-        width: clamp(45px, 7svh, 70px);
-        height: clamp(45px, 7svh, 70px);
-        bottom: max(clamp(8px, 1.5svh, 15px), 12px);
-      }
-      .tool-btn {
-        font-size: clamp(12px, 1.8svh, 18px);
-        padding: clamp(3px, 0.6svh, 6px);
-      }
-    }
     
-    @media (max-height: 500px) {
-      #camera { 
-        min-height: clamp(120px, 30svh, 250px);
-        max-height: calc(100svh - 80px); /* Reserve more space for toolbar */
-      }
-      #toolbar { 
-        min-height: clamp(30px, 4svh, 45px);
-        padding: clamp(2px, 0.5svh, 6px);
-      }
-      #captureBtn {
-        width: clamp(40px, 6svh, 60px);
-        height: clamp(40px, 6svh, 60px);
-        bottom: max(clamp(8px, 1.5svh, 15px), 10px);
-      }
-      .tool-btn { 
-        font-size: clamp(12px, 1.8svh, 18px);
-        padding: clamp(3px, 0.6svh, 6px);
-        min-width: 40px;
-        min-height: 40px;
-      }
+    /* Safe area (for notches, navigation bars) */
+    .safe-top {
+      padding-top: env(safe-area-inset-top);
     }
-    
-    @media (max-height: 400px) {
-      #camera { 
-        min-height: clamp(100px, 25svh, 200px);
-        max-height: calc(100svh - 60px); /* Minimal space for toolbar */
-      }
-      #toolbar { 
-        min-height: clamp(25px, 3svh, 40px);
-        padding: clamp(1px, 0.3svh, 4px);
-      }
-      #captureBtn {
-        width: clamp(35px, 5svh, 55px);
-        height: clamp(35px, 5svh, 55px);
-        bottom: max(clamp(5px, 1svh, 10px), 8px);
-      }
-      .tool-btn { 
-        font-size: clamp(10px, 1.5svh, 16px);
-        padding: clamp(2px, 0.4svh, 5px);
-        min-width: 36px;
-        min-height: 36px;
-      }
-      .mini-btn {
-        font-size: clamp(8px, 1.5svh, 10px);
-        padding: clamp(1px, 0.2svh, 3px) clamp(3px, 0.5svh, 5px);
-        min-width: 32px;
-        min-height: 32px;
-      }
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom);
     }
-
-    /* Responsive tweaks for landscape / small heights */
-    @media (orientation: landscape) and (max-height: 520px) {
-      body { 
-        padding-top: max(env(safe-area-inset-top, 0px), 5px);
-        padding-bottom: max(env(safe-area-inset-bottom, 0px), 5px);
-      }
-      #camera { 
-        min-height: clamp(120px, 30svh, 300px);
-        max-height: calc(100svh - 70px);
-      }
-      #toolbar { 
-        padding: clamp(3px, 0.6svh, 8px);
-        min-height: clamp(30px, 4svh, 50px);
-      }
-      .tool-btn { 
-        font-size: clamp(14px, 2svh, 18px);
-        min-width: 42px;
-        min-height: 42px;
-      }
-      #captureBtn {
-        width: clamp(40px, 6svh, 65px);
-        height: clamp(40px, 6svh, 65px);
-        bottom: max(clamp(8px, 1.5svh, 15px), 12px);
-      }
+    .safe-left {
+      padding-left: env(safe-area-inset-left);
     }
-    
-    /* Ultra-compact mode for very constrained spaces */
-    @media (orientation: landscape) and (max-height: 400px) {
-      #camera { 
-        min-height: clamp(80px, 25svh, 200px);
-        max-height: calc(100svh - 50px);
-      }
-      #toolbar { 
-        padding: clamp(2px, 0.4svh, 6px);
-        min-height: clamp(25px, 3svh, 40px);
-      }
-      .tool-btn { 
-        font-size: clamp(12px, 1.8svh, 16px);
-        padding: clamp(2px, 0.4svh, 6px);
-        min-width: 38px;
-        min-height: 38px;
-      }
-      #captureBtn {
-        width: clamp(35px, 5svh, 55px);
-        height: clamp(35px, 5svh, 55px);
-        bottom: max(clamp(5px, 1svh, 10px), 8px);
-      }
-    }
-    /* iOS-style button */
-    .ios-btn {
-      padding: 12px 24px;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(42, 42, 42, 0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #ffffff;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .ios-btn:hover {
-      background: rgba(60, 60, 60, 0.9);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-    }
-    .ios-btn:active { 
-      background: rgba(30, 30, 30, 0.9);
-      transform: translateY(0px);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    }
-    /* Size variants aligned to existing UI */
-    .tool-btn.ios-btn { 
-      padding: 8px 14px; 
-      font-size: clamp(14px, 2.2vw, 16px);
-      background: rgba(34, 34, 34, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    .mini-btn.ios-btn { 
-      padding: 4px 8px; 
-      font-size: 12px;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .btn.ios-btn { 
-      padding: 10px 16px; 
-      font-size: 14px;
-      background: rgba(42, 42, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .btn.primary.ios-btn { 
-      color: #ffffff; 
-      background: rgba(10, 132, 255, 0.8);
-      border: 1px solid rgba(10, 132, 255, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .btn.primary.ios-btn:hover {
-      background: rgba(10, 132, 255, 0.9);
-      border-color: rgba(10, 132, 255, 0.8);
-    }
-    .btn.danger.ios-btn { 
-      color: #ffffff; 
-      background: rgba(255, 69, 58, 0.8);
-      border: 1px solid rgba(255, 69, 58, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .btn.danger.ios-btn:hover {
-      background: rgba(255, 69, 58, 0.9);
-      border-color: rgba(255, 69, 58, 0.8);
-    }
-    /* Settings menu */
-    #settingsMenu {
-      position: fixed;
-      right: 10px;
-      top: calc(52px + env(safe-area-inset-top, 0px));
-      background: rgba(26,26,26,0.95);
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 8px;
-      display: none;
-      z-index: 1200;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    #settingsMenu.show { display: block; }
-    #settingsMenu .menu-item { margin: 4px 0; }
-    
-    /* Additional mobile optimizations */
-    @supports (height: 100svh) {
-      body {
-        height: 100svh;
-        min-height: 100svh;
-      }
-      .app-container {
-        height: 100svh;
-        max-height: 100svh;
-      }
-    }
-    
-    /* Fallback for older browsers */
-    @supports not (height: 100svh) {
-      body {
-        height: 100vh;
-        min-height: 100vh;
-      }
-      .app-container {
-        height: 100vh;
-        max-height: 100vh;
-      }
-    }
-    
-    /* Prevent iOS Safari bounce */
-    body {
-      -webkit-overflow-scrolling: touch;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-    }
-    
-    /* Ensure touch targets are accessible */
-    @media (pointer: coarse) {
-      .tool-btn, #captureBtn {
-        min-width: 44px;
-        min-height: 44px;
-      }
+    .safe-right {
+      padding-right: env(safe-area-inset-right);
     }
   </style>
-  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 </head>
-<body>
-  <div id="camera">
-    <video id="video" autoplay playsinline muted></video>
-    <button id="captureBtn"></button>
-    <div id="recordingTimer">00:00</div>
+<body class="bg-black text-white antialiased">
+
+  <!-- Main App Container -->
+  <div class="flex flex-col h-full h-svh w-full">
+    
+    <!-- Camera View -->
+    <div id="camera" class="flex-1 relative bg-black overflow-hidden">
+      <video id="video" autoplay playsinline muted></video>
+      
+      <!-- Recording Timer -->
+      <div id="recordingTimer" class="hidden absolute left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm text-red-500 font-mono font-bold px-4 py-2 rounded-full text-lg top-[calc(1rem+env(safe-area-inset-top))]">
+        00:00
+      </div>
+      
+      <!-- Capture Button Wrapper -->
+      <div class="absolute bottom-0 left-0 right-0 flex justify-center pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+        <button id="captureBtn" aria-label="Capture" class="w-16 h-16 rounded-full bg-white shadow-lg border-4 border-white transition-all duration-300 ease-in-out transform active:scale-95"></button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div id="toolbar" class="bg-black/80 backdrop-blur-sm safe-bottom safe-left safe-right">
+      <div class="flex justify-between items-center px-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+        
+        <!-- Tool Buttons -->
+        <button class="tool-btn" id="switchCam" aria-label="Switch camera">
+          <iconify-icon icon="ion:camera-reverse-outline" class="text-3xl"></iconify-icon>
+        </button>
+        
+        <button class="tool-btn flex items-center gap-2 bg-zinc-800 px-4 py-2 rounded-full" id="modeToggle" aria-label="Switch mode" title="Switch between photo and video">
+          <iconify-icon icon="ion:camera-outline" class="text-xl"></iconify-icon>
+          <span id="modeText" class="text-sm font-medium">Photo</span>
+        </button>
+        
+        <button class="tool-btn" id="settings" aria-label="Settings">
+          <iconify-icon icon="ion:settings-outline" class="text-3xl"></iconify-icon>
+        </button>
+        
+        <button class="tool-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false">
+          <!-- Content will be updated by JS -->
+        </button>
+        
+        <button class="tool-btn" id="openLibrary" title="View library" aria-label="Library">
+          <iconify-icon icon="ion:images-outline" class="text-3xl"></iconify-icon>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div id="toolbar">
-    <button class="tool-btn ios-btn" id="switchCam" aria-label="Switch camera"><iconify-icon icon="ion:camera-reverse-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="modeToggle" aria-label="Switch mode" title="Switch between photo and video"><iconify-icon icon="ion:camera-outline"></iconify-icon><span id="modeText">Photo</span></button>
-    <button class="tool-btn ios-btn" id="settings" aria-label="Settings"><iconify-icon icon="ion:settings-outline"></iconify-icon></button>
-    <button class="tool-btn ios-btn" id="autoSaveToggle" title="Auto download photos" aria-pressed="false"></button>
-    <button class="tool-btn ios-btn" id="openLibrary" title="View library" aria-label="Library"><iconify-icon icon="ion:images-outline"></iconify-icon></button>
-  </div>
-
-  <!-- Settings Menu -->
-  <div id="settingsMenu" role="menu" aria-hidden="true">
-    <button id="btnReloadAssets" class="btn ios-btn menu-item"><iconify-icon icon="ion:refresh-outline"></iconify-icon><span>Update</span></button>
+  <!-- Settings Menu (Dropdown) -->
+  <div id="settingsMenu" class="hidden fixed z-[100] bg-zinc-800/90 backdrop-blur-lg border border-zinc-700 rounded-lg shadow-xl p-2 top-[calc(4rem+env(safe-area-inset-top))] right-4 safe-right" role="menu" aria-hidden="true">
+    <button id="btnReloadAssets" class="menu-item flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm text-white hover:bg-zinc-700">
+      <iconify-icon icon="ion:refresh-outline" class="text-lg"></iconify-icon>
+      <span>Update App</span>
+    </button>
   </div>
 
   <!-- Library Modal -->
-  <div id="libraryModal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title">Photo Library</div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <button id="downloadAllBtn" class="btn primary ios-btn" title="Download all photos" style="padding: 6px 12px; font-size: 14px;">
-            <iconify-icon icon="ion:download-outline"></iconify-icon><span>Download All</span>
+  <div id="libraryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 safe-top safe-bottom safe-left safe-right" aria-hidden="true">
+    <div class="modal-content bg-zinc-900 text-zinc-100 rounded-2xl shadow-xl w-full max-w-3xl max-h-[85svh] flex flex-col">
+      <!-- Header -->
+      <div class="modal-header flex justify-between items-center p-4 border-b border-zinc-700 flex-shrink-0">
+        <h2 class="modal-title text-lg font-semibold">Photo Library</h2>
+        <div class="flex gap-2">
+          <button id="downloadAllBtn" class="btn primary flex items-center gap-2 text-sm">
+            <iconify-icon icon="ion:download-outline" class="text-lg"></iconify-icon>
+            <span>Download All</span>
           </button>
-          <button class="close-btn ios-btn" data-close-lib aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+          <button class="close-btn" data-close-lib aria-label="Close">
+            <iconify-icon icon="ion:close-outline" class="text-2xl"></iconify-icon>
+          </button>
         </div>
       </div>
-      <div class="modal-body">
-        <div id="libraryGrid" class="lib-grid"></div>
+      <!-- Body -->
+      <div class="modal-body p-4 overflow-y-auto">
+        <div id="libraryGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+          <!-- Library will be rendered here -->
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Preview Modal -->
-  <div id="previewModal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title">View Photo</div>
-        <button class="close-btn ios-btn" data-close-preview aria-label="Close"><iconify-icon icon="ion:close-outline"></iconify-icon></button>
+  <div id="previewModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 safe-top safe-bottom safe-left safe-right" aria-hidden="true">
+    <div class="modal-content bg-zinc-900 text-zinc-100 rounded-2xl shadow-xl w-full max-w-3xl max-h-[85svh] flex flex-col">
+      <!-- Header -->
+      <div class="modal-header flex justify-between items-center p-4 border-b border-zinc-700 flex-shrink-0">
+        <h2 id="previewTitle" class="modal-title text-lg font-semibold">View Media</h2>
+        <button class="close-btn" data-close-preview aria-label="Close">
+          <iconify-icon icon="ion:close-outline" class="text-2xl"></iconify-icon>
+        </button>
       </div>
-      <div class="modal-body">
-        <img id="previewImage" class="preview-image" alt="Preview" />
-        <div class="preview-actions">
-          <button id="downloadPreview" class="btn primary ios-btn"><iconify-icon icon="ion:download-outline"></iconify-icon><span>Download</span></button>
-          <button id="deletePreview" class="btn danger ios-btn"><iconify-icon icon="ion:trash-outline"></iconify-icon><span>Delete</span></button>
+      <!-- Body -->
+      <div class="modal-body p-4 overflow-y-auto flex flex-col items-center gap-4">
+        <!-- Image/video container -->
+        <div class="relative w-full max-h-[60svh] flex justify-center items-center">
+          <img id="previewImage" class="preview-media hidden max-w-full max-h-[60svh] object-contain rounded-lg" alt="Preview" />
+          <video id="previewVideo" class="preview-media hidden max-w-full max-h-[60svh] object-contain rounded-lg" controls></video>
+        </div>
+        <!-- Actions -->
+        <div class="preview-actions flex gap-4 justify-center">
+          <button id="downloadPreview" class="btn primary flex items-center gap-2">
+            <iconify-icon icon="ion:download-outline" class="text-lg"></iconify-icon>
+            <span>Download</span>
+          </button>
+          <button id="deletePreview" class="btn danger flex items-center gap-2">
+            <iconify-icon icon="ion:trash-outline" class="text-lg"></iconify-icon>
+            <span>Delete</span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Custom Confirm/Alert Modal (Replace alert/confirm) -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" aria-hidden="true">
+    <div class="modal-content bg-zinc-800 text-zinc-100 rounded-2xl shadow-xl w-full max-w-sm">
+      <!-- Header -->
+      <div class="modal-header p-5 text-center">
+        <h2 id="confirmTitle" class="modal-title text-lg font-semibold">Confirmation</h2>
+      </div>
+      <!-- Body -->
+      <div class="modal-body px-5 pb-5">
+        <p id="confirmMessage" class="text-sm text-zinc-300 text-center">Are you sure?</p>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer flex border-t border-zinc-700">
+        <button id="confirmCancel" class="w-1/2 p-3 text-blue-500 font-medium hover:bg-zinc-700/50 rounded-bl-2xl transition-colors">
+          Cancel
+        </button>
+        <button id="confirmOk" class="w-1/2 p-3 text-blue-500 font-bold hover:bg-zinc-700/50 rounded-br-2xl border-l border-zinc-700 transition-colors">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Hidden canvas for image processing -->
   <canvas id="canvas" style="display:none;"></canvas>
 
-  <script>
-    // Enhanced viewport height handling for mobile browsers
-    function setAppVhUnit() {
-      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-      const svh = window.innerHeight; // Small viewport height
-      const dvh = window.innerHeight; // Dynamic viewport height
-      
-      document.documentElement.style.setProperty('--app-vh', `${vh * 0.01}px`);
-      document.documentElement.style.setProperty('--app-svh', `${svh * 0.01}px`);
-      document.documentElement.style.setProperty('--app-dvh', `${dvh * 0.01}px`);
-      
-      // Update body padding to ensure content is always visible
-      const safeTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top') || '0');
-      const safeBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom') || '0');
-      
-      document.body.style.paddingTop = `${Math.max(safeTop, 10)}px`;
-      document.body.style.paddingBottom = `${Math.max(safeBottom, 10)}px`;
+  <!-- CSS for elements styled by JS -->
+  <style>
+    /* Styling for common UI buttons */
+    .tool-btn {
+      @apply text-zinc-300 hover:text-white transition-colors duration-200 p-2 rounded-full active:scale-90;
     }
-    
-    setAppVhUnit();
-    window.addEventListener('resize', setAppVhUnit, { passive: true });
-    window.addEventListener('orientationchange', setAppVhUnit, { passive: true });
-    
-    // Handle visual viewport changes (keyboard, browser UI)
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', setAppVhUnit, { passive: true });
+    .btn {
+      @apply px-4 py-2 rounded-full font-semibold text-sm transition-all duration-200 transform active:scale-95 shadow-lg border;
     }
+    .btn.primary {
+      @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-500;
+    }
+    .btn.danger {
+      @apply bg-red-600 text-white border-red-600 hover:bg-red-500;
+    }
+    .close-btn {
+      @apply text-zinc-400 hover:text-white hover:bg-zinc-700 rounded-full p-1 transition-all;
+    }
+    /* Style for AutoSave button */
+    #autoSaveToggle {
+      @apply text-xs px-3 py-2 rounded-full flex items-center gap-1.5 font-medium;
+    }
+    #autoSaveToggle[aria-pressed="true"] {
+      @apply bg-blue-600 text-white;
+    }
+    #autoSaveToggle[aria-pressed="false"] {
+      @apply bg-zinc-800 text-zinc-300 hover:bg-zinc-700;
+    }
+  </style>
 
+  <script>
+    'use strict';
+    
+    // ===== Element Refs =====
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
@@ -601,27 +344,44 @@
     const settingsBtn = document.getElementById('settings');
     const settingsMenu = document.getElementById('settingsMenu');
     const btnReloadAssets = document.getElementById('btnReloadAssets');
-    const libraryModal = document.getElementById('libraryModal');
-    const libraryGrid = document.getElementById('libraryGrid');
-    const previewModal = document.getElementById('previewModal');
-    const previewImage = document.getElementById('previewImage');
-    const downloadPreviewBtn = document.getElementById('downloadPreview');
-    const deletePreviewBtn = document.getElementById('deletePreview');
     const modeToggle = document.getElementById('modeToggle');
     const modeText = document.getElementById('modeText');
     const recordingTimer = document.getElementById('recordingTimer');
+
+    // Library Modal
+    const libraryModal = document.getElementById('libraryModal');
+    const libraryGrid = document.getElementById('libraryGrid');
+    const downloadAllBtn = document.getElementById('downloadAllBtn');
+
+    // Preview Modal
+    const previewModal = document.getElementById('previewModal');
+    const previewTitle = document.getElementById('previewTitle');
+    const previewImage = document.getElementById('previewImage');
+    const previewVideo = document.getElementById('previewVideo');
+    const downloadPreviewBtn = document.getElementById('downloadPreview');
+    const deletePreviewBtn = document.getElementById('deletePreview');
+
+    // Confirm Modal
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmTitle = document.getElementById('confirmTitle');
+    const confirmMessage = document.getElementById('confirmMessage');
+    const confirmOkBtn = document.getElementById('confirmOk');
+    const confirmCancelBtn = document.getElementById('confirmCancel');
+
+    // ===== App State =====
     let currentStream;
     let useFront = true;
     let photos = [];
     let videos = [];
-    let activePhotoId = null;
-    let activeVideoId = null;
+    let activeMediaId = null;
+    let activeMediaType = null;
     let autoSave = true;
     let currentMode = 'photo'; // 'photo' or 'video'
     let mediaRecorder = null;
     let recordedChunks = [];
     let recordingStartTime = null;
     let recordingInterval = null;
+    let confirmCallback = null;
 
     // ===== IndexedDB persistence =====
     const DB_NAME = 'camera-db';
@@ -631,167 +391,143 @@
 
     function openDb() {
       return new Promise((resolve, reject) => {
-        const req = indexedDB.open(DB_NAME, DB_VERSION);
-        req.onupgradeneeded = () => {
-          const db = req.result;
-          if (!db.objectStoreNames.contains(STORE_PHOTOS)) {
-            const store = db.createObjectStore(STORE_PHOTOS, { keyPath: 'id' });
-            store.createIndex('createdAt', 'createdAt');
-          }
-          if (!db.objectStoreNames.contains(STORE_VIDEOS)) {
-            const store = db.createObjectStore(STORE_VIDEOS, { keyPath: 'id' });
-            store.createIndex('createdAt', 'createdAt');
-          }
-        };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
+        try {
+          const req = indexedDB.open(DB_NAME, DB_VERSION);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if (!db.objectStoreNames.contains(STORE_PHOTOS)) {
+              db.createObjectStore(STORE_PHOTOS, { keyPath: 'id' }).createIndex('createdAt', 'createdAt');
+            }
+            if (!db.objectStoreNames.contains(STORE_VIDEOS)) {
+              db.createObjectStore(STORE_VIDEOS, { keyPath: 'id' }).createIndex('createdAt', 'createdAt');
+            }
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        } catch (e) {
+          reject(e);
+        }
       });
     }
 
-    async function dbSavePhoto(photo) {
+    async function dbSave(storeName, data) {
       try {
         const db = await openDb();
         await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_PHOTOS, 'readwrite');
-          tx.objectStore(STORE_PHOTOS).put(photo);
+          const tx = db.transaction(storeName, 'readwrite');
+          tx.objectStore(storeName).put(data);
           tx.oncomplete = () => resolve();
           tx.onerror = () => reject(tx.error);
         });
       } catch (e) {
-        console.error('Error saving photo to cache', e);
+        console.error(`Error saving to ${storeName}`, e);
       }
     }
 
-    async function dbDeletePhoto(id) {
+    async function dbDelete(storeName, id) {
       try {
         const db = await openDb();
         await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_PHOTOS, 'readwrite');
-          tx.objectStore(STORE_PHOTOS).delete(id);
+          const tx = db.transaction(storeName, 'readwrite');
+          tx.objectStore(storeName).delete(id);
           tx.oncomplete = () => resolve();
           tx.onerror = () => reject(tx.error);
         });
       } catch (e) {
-        console.error('Error deleting photo from cache', e);
+        console.error(`Error deleting from ${storeName}`, e);
       }
     }
 
-    async function dbLoadAllPhotos() {
+    async function dbLoadAll(storeName) {
       try {
         const db = await openDb();
         return await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_PHOTOS, 'readonly');
-          const req = tx.objectStore(STORE_PHOTOS).getAll();
+          const tx = db.transaction(storeName, 'readonly');
+          const req = tx.objectStore(storeName).getAll();
           req.onsuccess = () => {
             const list = req.result || [];
-            // Sort newest first
             list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             resolve(list);
           };
           req.onerror = () => reject(req.error);
         });
       } catch (e) {
-        console.error('Error loading photos from cache', e);
+        console.error(`Error loading from ${storeName}`, e);
         return [];
       }
     }
 
-    async function dbSaveVideo(video) {
-      try {
-        const db = await openDb();
-        await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_VIDEOS, 'readwrite');
-          tx.objectStore(STORE_VIDEOS).put(video);
-          tx.oncomplete = () => resolve();
-          tx.onerror = () => reject(tx.error);
-        });
-      } catch (e) {
-        console.error('Error saving video to cache', e);
-      }
+    // ===== Custom Alert / Confirm Functions =====
+    function showAlert(title, message) {
+      confirmTitle.textContent = title;
+      confirmMessage.textContent = message;
+      confirmCallback = null;
+      confirmOkBtn.textContent = 'OK';
+      confirmCancelBtn.classList.add('hidden');
+      confirmModal.classList.remove('hidden');
     }
 
-    async function dbDeleteVideo(id) {
-      try {
-        const db = await openDb();
-        await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_VIDEOS, 'readwrite');
-          tx.objectStore(STORE_VIDEOS).delete(id);
-          tx.oncomplete = () => resolve();
-          tx.onerror = () => reject(tx.error);
-        });
-      } catch (e) {
-        console.error('Error deleting video from cache', e);
-      }
+    function showConfirm(title, message, onOk) {
+      confirmTitle.textContent = title;
+      confirmMessage.textContent = message;
+      confirmCallback = onOk;
+      confirmOkBtn.textContent = 'OK';
+      confirmCancelBtn.classList.remove('hidden');
+      confirmModal.classList.remove('hidden');
     }
 
-    async function dbLoadAllVideos() {
-      try {
-        const db = await openDb();
-        return await new Promise((resolve, reject) => {
-          const tx = db.transaction(STORE_VIDEOS, 'readonly');
-          const req = tx.objectStore(STORE_VIDEOS).getAll();
-          req.onsuccess = () => {
-            const list = req.result || [];
-            // Sort newest first
-            list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-            resolve(list);
-          };
-          req.onerror = () => reject(req.error);
-        });
-      } catch (e) {
-        console.error('Error loading videos from cache', e);
-        return [];
+    confirmOkBtn.addEventListener('click', () => {
+      if (confirmCallback) {
+        confirmCallback();
       }
-    }
+      confirmModal.classList.add('hidden');
+    });
 
+    confirmCancelBtn.addEventListener('click', () => {
+      confirmCallback = null;
+      confirmModal.classList.add('hidden');
+    });
+    
+    // ===== Camera Logic =====
     async function initCamera() {
       if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
       }
-      const preferredConstraints = {
+      
+      const constraints = {
         video: {
           facingMode: useFront ? 'user' : 'environment',
           width: { ideal: 1920 },
           height: { ideal: 1080 },
-          aspectRatio: { ideal: window.innerWidth / Math.max(1, window.innerHeight) },
         },
-        audio: false,
+        audio: true, // Enable audio for video recording
       };
-      const fallbackConstraints = {
-        video: { facingMode: useFront ? 'user' : 'environment' },
-        audio: false,
-      };
+
       try {
-        currentStream = await navigator.mediaDevices.getUserMedia(preferredConstraints);
-      } catch (e1) {
+        currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+      } catch (e) {
+        console.error('Cannot access camera', e);
         try {
-          currentStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+          // Try again with video only if audio fails
+          constraints.audio = false;
+          currentStream = await navigator.mediaDevices.getUserMedia(constraints);
         } catch (e2) {
-          console.error('Cannot access camera', e2);
-          alert('Cannot access camera. Please check access permissions or try a different browser.');
+          console.error('Cannot access camera (fallback)', e2);
+          showAlert('Camera Error', 'Cannot access camera. Please check permissions or try a different browser.');
           return;
         }
       }
-      video.muted = true;
-      video.playsInline = true;
+      
       video.srcObject = currentStream;
-      // Mirror preview for front camera by default
       video.style.transform = useFront ? 'scaleX(-1)' : 'none';
     }
-
-    captureBtn.onclick = () => {
-      if (currentMode === 'photo') {
-        capturePhoto();
-      } else {
-        toggleVideoRecording();
-      }
-    };
 
     function capturePhoto() {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext('2d');
-      // Mirror captured image to match preview when using front camera
+      
+      // Flip image if using front camera
       ctx.save();
       if (useFront) {
         ctx.translate(canvas.width, 0);
@@ -799,18 +535,11 @@
       }
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       ctx.restore();
+      
       const dataUrl = canvas.toDataURL('image/png');
       const photo = addPhoto(dataUrl);
       if (autoSave && photo) {
-        downloadPhoto(photo.id);
-      }
-    }
-
-    function toggleVideoRecording() {
-      if (mediaRecorder && mediaRecorder.state === 'recording') {
-        stopVideoRecording();
-      } else {
-        startVideoRecording();
+        downloadMedia(photo.id, 'photo');
       }
     }
 
@@ -818,21 +547,31 @@
       if (!currentStream) return;
       
       recordedChunks = [];
-      mediaRecorder = new MediaRecorder(currentStream, {
-        mimeType: 'video/webm;codecs=vp9'
-      });
+      // Try common mimeTypes
+      const mimeTypes = [
+        'video/webm;codecs=vp9,opus',
+        'video/webm;codecs=vp8,opus',
+        'video/webm',
+        'video/mp4'
+      ];
+      const supportedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type));
+      
+      if (!supportedMimeType) {
+        showAlert('Video Recording Error', 'No supported video format found on this browser.');
+        return;
+      }
+
+      mediaRecorder = new MediaRecorder(currentStream, { mimeType: supportedMimeType });
       
       mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          recordedChunks.push(event.data);
-        }
+        if (event.data.size > 0) recordedChunks.push(event.data);
       };
       
       mediaRecorder.onstop = () => {
-        const blob = new Blob(recordedChunks, { type: 'video/webm' });
-        const video = addVideo(blob);
+        const blob = new Blob(recordedChunks, { type: supportedMimeType });
+        const video = addVideo(blob, supportedMimeType);
         if (autoSave && video) {
-          downloadVideo(video.id);
+          downloadMedia(video.id, 'video');
         }
       };
       
@@ -841,8 +580,9 @@
       recordingInterval = setInterval(updateRecordingTimer, 1000);
       
       // Update UI
-      captureBtn.classList.add('recording');
-      recordingTimer.style.display = 'block';
+      captureBtn.classList.remove('bg-white', 'rounded-full');
+      captureBtn.classList.add('bg-red-500', 'rounded-xl', 'animate-pulse');
+      recordingTimer.classList.remove('hidden');
       updateRecordingTimer();
     }
 
@@ -852,8 +592,9 @@
       }
       
       // Update UI
-      captureBtn.classList.remove('recording');
-      recordingTimer.style.display = 'none';
+      captureBtn.classList.add('bg-white', 'rounded-full');
+      captureBtn.classList.remove('bg-red-500', 'rounded-xl', 'animate-pulse');
+      recordingTimer.classList.add('hidden');
       if (recordingInterval) {
         clearInterval(recordingInterval);
         recordingInterval = null;
@@ -869,68 +610,97 @@
       }
     }
 
-    // Reinitialize camera on orientation change for better aspect match
-    window.addEventListener('orientationchange', () => {
-      setTimeout(() => initCamera(), 300);
-    }, { passive: true });
+    function toggleVideoRecording() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        stopVideoRecording();
+      } else {
+        startVideoRecording();
+      }
+    }
 
+    // ===== Media Management =====
     function addPhoto(dataUrl) {
-      const id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-      const index = photos.length + 1;
-      const filename = `photo_${index}.png`;
+      const id = 'p_' + Date.now();
+      const filename = `photo_${id}.png`;
       const createdAt = Date.now();
-      const photo = { id, dataUrl, filename, createdAt };
+      const photo = { id, dataUrl, filename, createdAt, type: 'photo' };
       photos.unshift(photo);
-      renderThumbRow();
-      if (libraryModal.classList.contains('show')) renderLibrary();
-      // Save to IndexedDB for offline cache
-      dbSavePhoto(photo);
+      dbSave(STORE_PHOTOS, photo);
+      if (libraryModal.classList.contains('hidden') === false) renderLibrary();
       return photo;
     }
 
-    function addVideo(blob) {
-      const id = 'v_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-      const index = videos.length + 1;
-      const filename = `video_${index}.webm`;
+    function addVideo(blob, mimeType) {
+      const id = 'v_' + Date.now();
+      const extension = mimeType.split('/')[1].split(';')[0];
+      const filename = `video_${id}.${extension}`;
       const createdAt = Date.now();
       const videoUrl = URL.createObjectURL(blob);
-      const video = { id, blob, videoUrl, filename, createdAt };
+      const video = { id, blob, videoUrl, filename, createdAt, type: 'video' };
       videos.unshift(video);
-      renderThumbRow();
-      if (libraryModal.classList.contains('show')) renderLibrary();
-      // Save to IndexedDB for offline cache
-      dbSaveVideo(video);
+      dbSave(STORE_VIDEOS, { id, blob, filename, createdAt, type: 'video' }); // Only save blob to DB
+      if (libraryModal.classList.contains('hidden') === false) renderLibrary();
       return video;
     }
 
-    function renderThumbRow() {
-      // This function is no longer needed as gallery is removed.
-      // The photo display is now handled by the preview modal.
+    function deleteMedia(mediaId, mediaType) {
+      if (mediaType === 'photo') {
+        const i = photos.findIndex(x => x.id === mediaId);
+        if (i > -1) photos.splice(i, 1);
+        dbDelete(STORE_PHOTOS, mediaId);
+      } else {
+        const i = videos.findIndex(x => x.id === mediaId);
+        if (i > -1) {
+          URL.revokeObjectURL(videos[i].videoUrl);
+          videos.splice(i, 1);
+        }
+        dbDelete(STORE_VIDEOS, mediaId);
+      }
+      
+      renderLibrary();
+      if (activeMediaId === mediaId) closePreview();
+    }
+    
+    function downloadMedia(mediaId, mediaType) {
+      const media = (mediaType === 'photo' ? photos : videos).find(x => x.id === mediaId);
+      if (!media) return;
+      
+      const a = document.createElement('a');
+      a.href = media.type === 'photo' ? media.dataUrl : media.videoUrl;
+      a.download = media.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
 
+    // ===== UI Functions =====
     function openLibrary() {
       renderLibrary();
-      libraryModal.classList.add('show');
+      libraryModal.classList.remove('hidden');
       libraryModal.setAttribute('aria-hidden', 'false');
     }
 
     function closeLibrary() {
-      libraryModal.classList.remove('show');
+      libraryModal.classList.add('hidden');
       libraryModal.setAttribute('aria-hidden', 'true');
     }
 
     function renderLibrary() {
       libraryGrid.innerHTML = '';
       
-      // Combine photos and videos, sort by creation date
       const allMedia = [
-        ...photos.map(p => ({ ...p, type: 'photo' })),
-        ...videos.map(v => ({ ...v, type: 'video' }))
+        ...photos,
+        ...videos.map(v => ({...v, videoUrl: URL.createObjectURL(v.blob)})) // Create new URL when rendering
       ].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      if (allMedia.length === 0) {
+        libraryGrid.innerHTML = `<p class="col-span-full text-center text-zinc-400">Your library is empty. Take some photos or videos!</p>`;
+        return;
+      }
 
       allMedia.forEach((media) => {
         const item = document.createElement('div');
-        item.className = 'lib-item';
+        item.className = 'relative aspect-square rounded-lg overflow-hidden border border-zinc-700 group cursor-pointer';
         item.dataset.id = media.id;
         item.dataset.type = media.type;
 
@@ -938,161 +708,97 @@
         if (media.type === 'photo') {
           thumb = document.createElement('img');
           thumb.src = media.dataUrl;
-          thumb.className = 'lib-thumb';
+          thumb.className = 'w-full h-full object-cover';
           thumb.alt = media.filename;
         } else {
           thumb = document.createElement('video');
           thumb.src = media.videoUrl;
-          thumb.className = 'lib-thumb';
+          thumb.className = 'w-full h-full object-cover';
           thumb.alt = media.filename;
           thumb.muted = true;
           thumb.preload = 'metadata';
         }
         
-        thumb.addEventListener('click', () => openPreview(media.id, media.type));
+        item.addEventListener('click', () => openPreview(media.id, media.type));
 
         const actions = document.createElement('div');
-        actions.className = 'lib-actions';
+        actions.className = 'absolute bottom-1 right-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity';
 
         const dl = document.createElement('button');
-        dl.className = 'mini-btn ios-btn';
-        dl.innerHTML = '<iconify-icon icon="ion:download-outline"></iconify-icon>';
+        dl.className = 'p-1.5 bg-black/60 backdrop-blur-sm rounded-full text-white hover:bg-black/80';
+        dl.innerHTML = '<iconify-icon icon="ion:download-outline" class="text-sm block"></iconify-icon>';
         dl.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (media.type === 'photo') {
-            downloadPhoto(media.id);
-          } else {
-            downloadVideo(media.id);
-          }
+          downloadMedia(media.id, media.type);
         });
 
         const del = document.createElement('button');
-        del.className = 'mini-btn ios-btn';
-        del.innerHTML = '<iconify-icon icon="ion:trash-outline"></iconify-icon>';
+        del.className = 'p-1.5 bg-black/60 backdrop-blur-sm rounded-full text-red-500 hover:bg-black/80';
+        del.innerHTML = '<iconify-icon icon="ion:trash-outline" class="text-sm block"></iconify-icon>';
         del.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (media.type === 'photo') {
-            deletePhoto(media.id);
-          } else {
-            deleteVideo(media.id);
-          }
+          showConfirm('Delete Media?', `Are you sure you want to delete this ${media.type}?`, () => {
+            deleteMedia(media.id, media.type);
+          });
         });
 
         actions.appendChild(dl);
         actions.appendChild(del);
         item.appendChild(thumb);
+        if (media.type === 'video') {
+          const videoIcon = document.createElement('div');
+          videoIcon.className = 'absolute top-1 left-1 bg-black/60 backdrop-blur-sm rounded-full p-1';
+          videoIcon.innerHTML = '<iconify-icon icon="ion:videocam-outline" class="text-xs text-white block"></iconify-icon>';
+          item.appendChild(videoIcon);
+        }
         item.appendChild(actions);
         libraryGrid.appendChild(item);
       });
     }
 
     function openPreview(mediaId, mediaType) {
-      let media;
-      if (mediaType === 'photo') {
-        media = photos.find(x => x.id === mediaId);
-        activePhotoId = mediaId;
-        activeVideoId = null;
-      } else {
-        media = videos.find(x => x.id === mediaId);
-        activeVideoId = mediaId;
-        activePhotoId = null;
-      }
-      
+      const media = (mediaType === 'photo' ? photos : videos).find(x => x.id === mediaId);
       if (!media) return;
+
+      activeMediaId = mediaId;
+      activeMediaType = mediaType;
       
-      // Update modal title
-      const modalTitle = document.querySelector('#previewModal .modal-title');
-      modalTitle.textContent = mediaType === 'photo' ? 'View Photo' : 'View Video';
+      previewTitle.textContent = mediaType === 'photo' ? 'View Photo' : 'View Video';
       
-      // Update preview content
       if (mediaType === 'photo') {
         previewImage.src = media.dataUrl;
         previewImage.alt = media.filename;
-        previewImage.style.display = 'block';
-        // Hide video element if it exists
-        const previewVideo = document.getElementById('previewVideo');
-        if (previewVideo) {
-          previewVideo.style.display = 'none';
-        }
+        previewImage.classList.remove('hidden');
+        previewVideo.classList.add('hidden');
+        previewVideo.pause();
+        previewVideo.src = '';
       } else {
-        // Create video element if it doesn't exist
-        let previewVideo = document.getElementById('previewVideo');
-        if (!previewVideo) {
-          previewVideo = document.createElement('video');
-          previewVideo.id = 'previewVideo';
-          previewVideo.className = 'preview-image';
-          previewVideo.controls = true;
-          previewImage.parentNode.insertBefore(previewVideo, previewImage);
-        }
         previewVideo.src = media.videoUrl;
-        previewVideo.style.display = 'block';
-        previewImage.style.display = 'none';
+        previewVideo.classList.remove('hidden');
+        previewImage.classList.add('hidden');
+        previewImage.src = '';
       }
       
-      previewModal.classList.add('show');
+      previewModal.classList.remove('hidden');
       previewModal.setAttribute('aria-hidden', 'false');
     }
 
     function closePreview() {
-      previewModal.classList.remove('show');
+      previewModal.classList.add('hidden');
       previewModal.setAttribute('aria-hidden', 'true');
-      activePhotoId = null;
-      activeVideoId = null;
+      activeMediaId = null;
+      activeMediaType = null;
+      // Stop video when closing
+      previewVideo.pause();
+      previewVideo.src = '';
+      previewImage.src = '';
     }
 
-    function downloadPhoto(photoId) {
-      const photo = photos.find(x => x.id === photoId);
-      if (!photo) return;
-      const a = document.createElement('a');
-      a.href = photo.dataUrl;
-      a.download = photo.filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    function downloadVideo(videoId) {
-      const video = videos.find(x => x.id === videoId);
-      if (!video) return;
-      const a = document.createElement('a');
-      a.href = video.videoUrl;
-      a.download = video.filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    function deletePhoto(photoId) {
-      const i = photos.findIndex(x => x.id === photoId);
-      if (i === -1) return;
-      photos.splice(i, 1);
-      renderThumbRow();
-      if (libraryModal.classList.contains('show')) renderLibrary();
-      if (activePhotoId === photoId) closePreview();
-      // Delete from IndexedDB
-      dbDeletePhoto(photoId);
-    }
-
-    function deleteVideo(videoId) {
-      const i = videos.findIndex(x => x.id === videoId);
-      if (i === -1) return;
-      const video = videos[i];
-      URL.revokeObjectURL(video.videoUrl);
-      videos.splice(i, 1);
-      renderThumbRow();
-      if (libraryModal.classList.contains('show')) renderLibrary();
-      if (activeVideoId === videoId) closePreview();
-      // Delete from IndexedDB
-      dbDeleteVideo(videoId);
-    }
-
-    document.getElementById('switchCam').onclick = () => {
-      useFront = !useFront;
-      initCamera();
-    };
-
-    // Mode toggle functionality
     function toggleMode() {
+      // Stop video recording if currently recording
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        stopVideoRecording();
+      }
       currentMode = currentMode === 'photo' ? 'video' : 'photo';
       updateModeUI();
     }
@@ -1102,122 +808,135 @@
       if (currentMode === 'photo') {
         modeText.textContent = 'Photo';
         icon.setAttribute('icon', 'ion:camera-outline');
-        captureBtn.classList.remove('video-mode');
+        captureBtn.classList.remove('rounded-xl'); // Switch to round
+        captureBtn.classList.add('rounded-full', 'bg-white');
       } else {
         modeText.textContent = 'Video';
         icon.setAttribute('icon', 'ion:videocam-outline');
-        captureBtn.classList.add('video-mode');
+        captureBtn.classList.remove('rounded-full'); // Switch to square
+        captureBtn.classList.add('rounded-xl', 'bg-white');
       }
     }
 
-    modeToggle.addEventListener('click', toggleMode);
-
-    // Auto save toggle
     function updateAutoSaveBtn() {
       const label = autoSave ? 'ON' : 'OFF';
-      autoSaveToggle.innerHTML = '<iconify-icon icon="ion:save-outline"></iconify-icon><span>'+label+'</span>';
+      autoSaveToggle.innerHTML = `<iconify-icon icon="ion:save-outline" class="text-lg"></iconify-icon><span>${label}</span>`;
       autoSaveToggle.setAttribute('aria-pressed', String(autoSave));
     }
+
+    function toggleSettingsMenu(show) {
+      const willShow = typeof show === 'boolean' ? show : settingsMenu.classList.contains('hidden');
+      if (willShow) {
+        settingsMenu.classList.remove('hidden');
+        settingsMenu.setAttribute('aria-hidden', 'false');
+      } else {
+        settingsMenu.classList.add('hidden');
+        settingsMenu.setAttribute('aria-hidden', 'true');
+      }
+    }
+    
+    // ===== Event Listeners =====
+    captureBtn.addEventListener('click', () => {
+      if (currentMode === 'photo') {
+        capturePhoto();
+      } else {
+        toggleVideoRecording();
+      }
+    });
+
+    document.getElementById('switchCam').addEventListener('click', () => {
+      useFront = !useFront;
+      initCamera();
+    });
+
+    modeToggle.addEventListener('click', toggleMode);
+
     autoSaveToggle.addEventListener('click', () => {
       autoSave = !autoSave;
       updateAutoSaveBtn();
     });
-    updateAutoSaveBtn();
 
-    // Toolbar: open library
     openLibraryBtn.addEventListener('click', openLibrary);
-
-    // Close buttons and backdrop click
+    
+    // Close modals
     libraryModal.addEventListener('click', (e) => {
-      if (e.target === libraryModal || e.target.hasAttribute('data-close-lib')) closeLibrary();
+      if (e.target === libraryModal || e.target.closest('[data-close-lib]')) closeLibrary();
     });
     previewModal.addEventListener('click', (e) => {
-      if (e.target === previewModal || e.target.hasAttribute('data-close-preview')) closePreview();
+      if (e.target === previewModal || e.target.closest('[data-close-preview]')) closePreview();
     });
 
     // Preview actions
     downloadPreviewBtn.addEventListener('click', () => {
-      if (activePhotoId) downloadPhoto(activePhotoId);
-      if (activeVideoId) downloadVideo(activeVideoId);
+      if (activeMediaId) downloadMedia(activeMediaId, activeMediaType);
     });
     deletePreviewBtn.addEventListener('click', () => {
-      if (activePhotoId) deletePhoto(activePhotoId);
-      if (activeVideoId) deleteVideo(activeVideoId);
+      if (activeMediaId) {
+        showConfirm(`Delete ${activeMediaType}?`, `Are you sure you want to delete this ${activeMediaType}?`, () => {
+          deleteMedia(activeMediaId, activeMediaType);
+        });
+      }
     });
 
-    // Download All functionality
-    document.getElementById('downloadAllBtn').addEventListener('click', () => {
+    // Download All
+    downloadAllBtn.addEventListener('click', () => {
       const totalMedia = photos.length + videos.length;
       if (totalMedia === 0) {
-        alert('Không có ảnh hoặc video nào để tải xuống.');
+        showAlert('Library Empty', 'There are no photos or videos to download.');
         return;
       }
       
-      // Create a confirmation dialog
-      if (!confirm(`Bạn có muốn tải xuống tất cả ${totalMedia} file (${photos.length} ảnh, ${videos.length} video) không?`)) {
-        return;
+      showConfirm(
+        'Download All?',
+        `Do you want to download all ${totalMedia} files (${photos.length} photos, ${videos.length} videos)?`,
+        () => {
+          let downloadCount = 0;
+          [...photos, ...videos].forEach((media) => {
+            setTimeout(() => {
+              downloadMedia(media.id, media.type);
+            }, downloadCount * 100);
+            downloadCount++;
+          });
+          setTimeout(() => {
+            showAlert('Download Started', `Started downloading ${totalMedia} files.`);
+          }, 200);
+        }
+      );
+    });
+    
+    // Settings Menu
+    settingsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSettingsMenu();
+    });
+    document.addEventListener('click', (e) => {
+      if (!settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
+        toggleSettingsMenu(false);
       }
-      
-      let downloadCount = 0;
-      
-      // Download each photo with a small delay to avoid overwhelming the browser
-      photos.forEach((photo, index) => {
-        setTimeout(() => {
-          const a = document.createElement('a');
-          a.href = photo.dataUrl;
-          a.download = photo.filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          downloadCount++;
-        }, downloadCount * 100); // 100ms delay between each download
-      });
-      
-      // Download each video with a small delay
-      videos.forEach((video, index) => {
-        setTimeout(() => {
-          const a = document.createElement('a');
-          a.href = video.videoUrl;
-          a.download = video.filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          downloadCount++;
-        }, downloadCount * 100);
-      });
-      
-      // Show success message
-      setTimeout(() => {
-        alert(`Đã bắt đầu tải xuống ${totalMedia} file.`);
-      }, 200);
+    }, { passive: true });
+
+    btnReloadAssets.addEventListener('click', async () => {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (reg && reg.active) {
+          reg.active.postMessage({ type: 'CLEAR_AND_RELOAD' });
+          setTimeout(() => window.location.reload(true), 300);
+        } else {
+          if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+          }
+          window.location.reload(true);
+        }
+      } catch (e) {
+        window.location.reload(true);
+      }
     });
 
-    // Initialize: load photos and videos from cache then start camera
-    (async () => {
-      const cachedPhotos = await dbLoadAllPhotos();
-      const cachedVideos = await dbLoadAllVideos();
-      
-      if (Array.isArray(cachedPhotos) && cachedPhotos.length) {
-        photos = cachedPhotos;
-      }
-      
-      if (Array.isArray(cachedVideos) && cachedVideos.length) {
-        videos = cachedVideos;
-      }
-      
-      if (photos.length > 0 || videos.length > 0) {
-        renderThumbRow();
-      }
-      
-      initCamera();
-      updateModeUI(); // Initialize UI state
-    })();
-
-    // ===== Service Worker Registration =====
+    // ===== Service Worker =====
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').then((reg) => {
-          // Listen for updatefound to auto-activate new SW
           if (reg.waiting) {
             reg.waiting.postMessage({ type: 'SKIP_WAITING' });
           }
@@ -1226,7 +945,7 @@
             if (!nw) return;
             nw.addEventListener('statechange', () => {
               if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-                // New version installed; optionally notify user
+                // New version installed
               }
             });
           });
@@ -1239,42 +958,27 @@
       });
     }
 
-    // ===== Settings menu actions =====
-    function toggleSettingsMenu(show) {
-      const willShow = typeof show === 'boolean' ? show : !settingsMenu.classList.contains('show');
-      if (willShow) {
-        settingsMenu.classList.add('show');
-        settingsMenu.setAttribute('aria-hidden', 'false');
-      } else {
-        settingsMenu.classList.remove('show');
-        settingsMenu.setAttribute('aria-hidden', 'true');
+    // ===== App Initialization =====
+    (async () => {
+      const cachedPhotos = await dbLoadAll(STORE_PHOTOS);
+      if (Array.isArray(cachedPhotos) && cachedPhotos.length) {
+        photos = cachedPhotos;
       }
-    }
-    settingsBtn.addEventListener('click', () => toggleSettingsMenu());
-    document.addEventListener('click', (e) => {
-      const within = settingsMenu.contains(e.target) || settingsBtn.contains(e.target);
-      if (!within) toggleSettingsMenu(false);
-    }, { passive: true });
-
-    btnReloadAssets.addEventListener('click', async () => {
-      try {
-        const reg = await navigator.serviceWorker.getRegistration();
-        if (reg && reg.active) {
-          reg.active.postMessage({ type: 'CLEAR_AND_RELOAD' });
-          // Give SW a moment to clear caches, then hard reload
-          setTimeout(() => window.location.reload(true), 300);
-        } else {
-          // Fallback: clear caches via CacheStorage API then reload
-          if ('caches' in window) {
-            const keys = await caches.keys();
-            await Promise.all(keys.map(k => caches.delete(k)));
-          }
-          window.location.reload(true);
-        }
-      } catch (e) {
-        window.location.reload(true);
+      
+      const cachedVideosBlobs = await dbLoadAll(STORE_VIDEOS);
+      if (Array.isArray(cachedVideosBlobs) && cachedVideosBlobs.length) {
+        // Recreate videoUrl from blob
+        videos = cachedVideosBlobs.map(v => ({
+          ...v,
+          videoUrl: URL.createObjectURL(v.blob)
+        }));
       }
-    });
+      
+      await initCamera();
+      updateModeUI();
+      updateAutoSaveBtn();
+    })();
+    
   </script>
 </body>
 </html>
