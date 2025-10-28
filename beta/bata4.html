@@ -2,103 +2,12 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Text2 - Camera</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Text2 Camera - Ứng dụng chụp ảnh và quay video trực tuyến miễn phí. Chụp ảnh chất lượng cao, quay video HD, thêm watermark, lưu trữ thư viện ảnh trên trình duyệt. Không cần cài đặt!">
-    <meta name="keywords" content="text2 camera, chụp ảnh online, quay video trực tuyến, camera web, ứng dụng camera miễn phí, chụp ảnh trình duyệt, quay video web, camera online, text2 - camera">
-    <meta name="author" content="Text2">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="Vietnamese">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://camera.text2.click">
-    <meta property="og:title" content="Text2 Camera - Ứng dụng chụp ảnh và quay video trực tuyến miễn phí">
-    <meta property="og:description" content="Chụp ảnh và quay video chất lượng cao trực tiếp trên trình duyệt. Không cần cài đặt, hỗ trợ nhiều định dạng, có watermark và thư viện lưu trữ.">
-    <meta property="og:image" content="https://camera.text2.click/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Text2 Camera">
-    <meta property="og:locale" content="vi_VN">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://camera.text2.click">
-    <meta name="twitter:title" content="Text2 Camera - Ứng dụng chụp ảnh và quay video trực tuyến">
-    <meta name="twitter:description" content="Chụp ảnh và quay video chất lượng cao trực tiếp trên trình duyệt. Miễn phí, không cần cài đặt!">
-    <meta name="twitter:image" content="https://camera.text2.click/og-image.jpg">
-    <meta name="twitter:creator" content="@text2click">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://camera.text2.click">
-    
-    <!-- Alternate Languages -->
-    <link rel="alternate" hreflang="vi" href="https://camera.text2.click">
-    <link rel="alternate" hreflang="en" href="https://camera.text2.click/en">
-    <link rel="alternate" hreflang="x-default" href="https://camera.text2.click">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#000000">
-    <meta name="msapplication-TileColor" content="#000000">
-    
-    <!-- Structured Data - WebApplication -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Text2 Camera",
-        "alternateName": "Text2 - Camera",
-        "url": "https://camera.text2.click",
-        "description": "Ứng dụng chụp ảnh và quay video trực tuyến miễn phí. Chụp ảnh chất lượng cao, quay video HD, thêm watermark, lưu trữ thư viện ảnh trên trình duyệt.",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "VND"
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "Text2",
-            "url": "https://text2.click"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Text2",
-            "url": "https://text2.click"
-        },
-        "screenshot": "https://camera.text2.click/screenshot.jpg",
-        "featureList": [
-            "Chụp ảnh chất lượng cao",
-            "Quay video HD",
-            "Thêm watermark",
-            "Lưu trữ thư viện ảnh",
-            "Hỗ trợ nhiều định dạng",
-            "Không cần cài đặt"
-        ],
-        "browserRequirements": "Requires JavaScript. Requires HTML5.",
-        "softwareVersion": "1.0",
-        "datePublished": "2024-01-01",
-        "dateModified": "2024-01-01"
-    }
-    </script>
-    
+    <title>Text2Cam Web App</title>
     <!-- Đảm bảo giao diện tối ưu trên di động -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Đảm bảo chạy như một web-app (ẩn thanh địa chỉ) -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Text2 Camera">
-    
     <style>
         /* CSS Reset và Cài đặt chung */
         * {
@@ -156,11 +65,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover; /* Đảm bảo video lấp đầy khung nhìn */
-        }
-        
-        /* Lật video preview */
-        #video-preview.flipped {
-            transform: scaleX(-1);
         }
 
         /* Lưới (Grid Overlay) */
@@ -598,7 +502,7 @@
             <!-- Nút đổi camera (trước/sau) -->
             <button id="flip-camera-btn" class="icon-button">
                 <!-- Icon đổi camera -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.83,8H11v2H9.83c-0.41,0-0.8-0.17-1.1-0.45L7.9,8.71C7.62,8.42,7.62,7.58,7.9,7.29l0.83-0.83 C9.03,6.17,9.42,6,9.83,6H11V4H9.83C8.67,4,7.67,4.42,6.92,5.17l-0.83,0.83c-1.17,1.17-1.17,3.07,0,4.24l0.83,0.83 C7.67,11.58,8.67,12,9.83,12H11v-2H9.83c-0.41,0-0.8-0.17-1.1-0.45L7.9,8.71C7.62,8.42,7.62,7.58,7.9,7.29L8.73,6.45 C9.03,6.17,9.42,6,9.83,6V8z M14.17,16H13v-2h1.17c0.41,0,0.8-0.17,1.1-0.45l0.83-0.83c0.29-0.29,0.29-0.77,0-1.06l-0.83-0.83 c-0.3-0.28-0.69-0.45-1.1-0.45H13V8h1.17c1.16,0,2.16,0.42,2.91,1.17l0.83,0.83c1.17,1.17,1.17,3.07,0,4.24l-0.83,0.83 C16.33,15.58,15.33,16,14.17,16z M17,20v-3h-2v3H7v-3H5v3c0,1.1,0.9,2,2,2h10C18.1,22,19,21.1,19,20z M17,4V1h-2v3H7V1H5v3C5,2.9,4.1,2,3,2v0 C3,2,3,2,3,2C3,2,3,2,3,2C3,2,3,2,3,2v0C3,2,3,2,3,2c0,0,0,0,0,0v0c0,0,0,0,0,0H3v0c0,0,0,0,0,0v0H3c0,0,0,0,0,0H3v0c0,0,0,0,0,0 c0,0,0,0,0,0c0,0,0,0,0,0h0v0c0,0,0,0,0,0H3v0h0C3,2,3,2,3,2v0h0v0H3v0h0v0c0,0,0,0,0,0V2h0c0,0,0,0,0,0h0v0h0v0H3c0,0,0,0,0,0 h0v0h0V2h0c0,0,0,0,0,0h0V2h0v0h0V2h0c0,0,0,0,0,0h0v0h0v0h0v0h0c0,0,0,0,0,0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0V2h0V2h0 V2h0V2h0v0h0v0h0v0h0v0H5V2h12V4z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.83,8H11v2H9.83c-0.41,0-0.8-0.17-1.1-0.45L7.9,8.71C7.62,8.42,7.62,7.58,7.9,7.29l0.83-0.83 C9.03,6.17,9.42,6,9.83,6H11V4H9.83C8.67,4,7.67,4.42,6.92,5.17l-0.83,0.83c-1.17,1.17-1.17,3.07,0,4.24l0.83,0.83 C7.67,11.58,8.67,12,9.83,12H11v-2H9.83c-0.41,0-0.8-0.17-1.1-0.45L7.9,8.71C7.62,8.42,7.62,7.58,7.9,7.29L8.73,6.45 C9.03,6.17,9.42,6,9.83,6V8z M14.17,16H13v-2h1.17c0.41,0,0.8-0.17,1.1-0.45l0.83-0.83c0.29-0.29,0.29-0.77,0-1.06l-0.83-0.83 c-0.3-0.28-0.69-0.45-1.1-0.45H13V8h1.17c1.16,0,2.16,0.42,2.91,1.17l0.83,0.83c1.17,1.17,1.17,3.07,0,4.24l-0.83,0.83 C16.33,15.58,15.33,16,14.17,16z M17,20v-3h-2v3H7v-3H5v3c0,1.1,0.9,2,2,2h10C18.1,22,19,21.1,19,20z M17,4V1h-2v3H7V1H5v3C5,2.9,4.1,2,3,2v0 C3,2,3,2,3,2C3,2,3,2,3,2C3,2,3,2,3,2v0C3,2,3,2,3,2c0,0,0,0,0,0v0c0,0,0,0,0,0H3v0c0,0,0,0,0,0v0H3c0,0,0,0,0,0H3v0c0,0,0,0,0,0 c0,0,0,0,0,0c0,0,0,0,0,0h0v0c0,0,0,0,0,0H3v0h0C3,2,3,2,3,2v0h0v0H3v0h0v0c0,0,0,0,0,0V2h0c0,0,0,0,0,0h0v0h0v0H3c0,0,0,0,0,0 h0v0h0V2h0c0,0,0,0,0,0h0V2h0v0h0V2h0c0,0,0,0,0,0h0v0h0v0h0v0h0c0,0,0,0,0,0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0V2h0V2h0 V2h0V2h0v0h0v0h0v0h0v0h0v0H5V2h12V4z"/></svg>
             </button>
         </div>
     </div>
