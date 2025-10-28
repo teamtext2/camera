@@ -545,7 +545,7 @@
                 try {
                     currentStream = await navigator.mediaDevices.getUserMedia(constraints);
                     video.srcObject = currentStream;
-                    video.style.transform = currentFacingMode === 'user' ? 'scaleX(-1)' : 'scaleX(1)';
+                    video.style.transform = (currentFacingMode === 'user' && settings.mirrorFrontCamera) ? 'scaleX(-1)' : 'scaleX(1)';
                 } catch (err) {
                     console.error("Error accessing camera:", err);
                     alert("Không thể truy cập camera. Vui lòng cấp quyền.");
@@ -569,17 +569,18 @@
                 canvas.width = videoWidth;
                 canvas.height = videoHeight;
 
-                // Lật ảnh nếu là camera trước
-                if (currentFacingMode === 'user') {
+                // Lật ảnh nếu là camera trước và cài đặt bật
+                context.save();
+                if (currentFacingMode === 'user' && settings.mirrorFrontCamera) {
                     context.translate(videoWidth, 0);
                     context.scale(-1, 1);
                 }
 
                 context.drawImage(video, 0, 0, videoWidth, videoHeight);
+                context.restore();
 
                 // Thêm watermark nếu bật
                 if (settings.watermark) {
-                    context.restore(); // Reset transform để vẽ text
                     context.font = `${Math.min(videoWidth, videoHeight) * 0.05}px Arial`;
                     context.fillStyle = 'rgba(255, 255, 255, 0.7)';
                     context.textAlign = 'right';
@@ -676,6 +677,9 @@
                 
                 // Grid
                 gridOverlay.classList.toggle('hidden', !settings.grid);
+
+                // Preview transform theo cài đặt lật ảnh
+                video.style.transform = (currentFacingMode === 'user' && settings.mirrorFrontCamera) ? 'scaleX(-1)' : 'scaleX(1)';
 
                 // Labels
                 currentResolution.textContent = settings.resolution.label;
