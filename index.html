@@ -1,13 +1,95 @@
 <!DOCTYPE html>
-<html lang="vi" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Text2 Cam</title>
-    <!-- Tải Tailwind CSS -->
+    <meta name="google" content="notranslate"> 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1722731267767270"
+    crossorigin="anonymous"></script>
+    <!-- SEO Meta Tags -->
+    <title>Text2 - Camera</title>
+    <meta name="description" content="Text2 Camera - Free online photo and video capture app. Take high-quality photos, record HD videos, add watermarks, local storage. No installation required, use directly in browser.">
+    <meta name="keywords" content="Text2 Camera, online photo capture, online video recording, web camera, camera app, free photo capture, free video recording, web cam, photo capture, video recording">
+    <meta name="author" content="Text2">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEFG123"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-6J85STMJ14');
+  </script>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website"> 
+    <meta property="og:url" content="https://camera.text2.click">
+    <meta property="og:title" content="Text2 Camera - Free online photo and video capture app">
+    <meta property="og:description" content="Text2 Camera - Free online photo and video capture app. Take high-quality photos, record HD videos, add watermarks, local storage. No installation required, use directly in browser.">
+    <meta property="og:image" content="/favicon.ico">
+    <meta property="og:image:width" content="32">
+    <meta property="og:image:height" content="32">
+    <meta property="og:site_name" content="Text2 Camera">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://camera.text2.click">
+    <meta name="twitter:title" content="Text2 Camera - Free online photo and video capture app">
+    <meta name="twitter:description" content="Text2 Camera - Free online photo and video capture app. Take high-quality photos, record HD videos, add watermarks, local storage.">
+    <meta name="twitter:image" content="/favicon.ico">
+    <meta name="twitter:creator" content="@text2">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://camera.text2.click">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Text2 Camera">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text2 Camera",
+        "description": "Free online photo and video capture app with professional features",
+        "url": "https://camera.text2.click",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Text2"
+        },
+        "featureList": [
+            "High-quality photo capture",
+            "HD video recording",
+            "Add watermarks",
+            "Local storage",
+            "Multiple image formats",
+            "Grid overlay support",
+            "Front/rear camera flip"
+        ]
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Đảm bảo toàn màn hình và không thể cuộn */
+        /* Ensure full screen and no scrolling */
         html, body {
             height: 100%;
             width: 100%;
@@ -16,7 +98,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Tùy chỉnh thanh cuộn cho thư viện */
+        /* Custom scrollbar for gallery */
         .modal-body::-webkit-scrollbar {
             width: 4px;
         }
@@ -25,7 +107,7 @@
             border-radius: 20px;
         }
 
-        /* Hiệu ứng flash khi chụp */
+        /* Flash effect when capturing */
         .flash-effect {
             position: absolute;
             top: 0;
@@ -43,7 +125,7 @@
             opacity: 0.8;
         }
 
-        /* Lưới camera */
+        /* Camera grid */
         .grid-overlay {
             position: absolute;
             top: 0;
@@ -60,21 +142,21 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Nút chụp ảnh */
+        /* Capture button */
         .capture-btn {
             width: 70px;
             height: 70px;
             background-color: white;
             border-radius: 50%;
-            border: 6px solid rgba(255, 255, 255, 0.3); /* Dày hơn và trong suốt */
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); /* Thêm bóng */
+            border: 6px solid rgba(255, 255, 255, 0.3); /* Thicker and transparent */
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); /* Add shadow */
             transition: all 0.2s ease;
         }
         .capture-btn:active {
             transform: scale(0.9);
-            background-color: #f1f5f9; /* Hơi xám khi nhấn */
+            background-color: #f1f5f9; /* Slightly gray when pressed */
         }
-        /* Nút khi quay video */
+        /* Button when recording video */
         .capture-btn.recording {
             background-color: red;
             border-color: rgba(255, 0, 0, 0.4);
@@ -94,7 +176,7 @@
             100% { border-color: rgba(255, 0, 0, 0.4); }
         }
 
-        /* Nút toggle (iOS Style) */
+        /* Toggle button (iOS Style) */
         .toggle-bg {
             width: 3rem; /* 48px */
             height: 1.75rem; /* 28px */
@@ -103,7 +185,7 @@
             padding: 0.25rem; /* 4px */
             transition: background-color 0.2s ease-in-out;
             cursor: pointer;
-            flex-shrink: 0; /* Ngăn co lại */
+            flex-shrink: 0; /* Prevent shrinking */
         }
         .toggle-bg.toggled {
             background-color: #3b82f6; /* blue-500 */
@@ -127,54 +209,54 @@
     <!-- Camera View -->
     <video id="cameraView" class="w-full h-full object-cover" playsinline autoplay muted></video>
 
-    <!-- Canvas (ẩn) để chụp ảnh -->
+    <!-- Canvas (hidden) for photo capture -->
     <canvas id="canvas" class="hidden"></canvas>
 
-    <!-- Hiệu ứng flash -->
+    <!-- Flash effect -->
     <div id="flashEffect" class="flash-effect"></div>
 
-    <!-- Lưới Camera (ẩn mặt định) -->
+    <!-- Camera Grid (hidden by default) -->
     <div id="gridOverlay" class="grid-overlay hidden">
         <div></div><div></div><div></div>
         <div></div><div></div><div></div>
         <div></div><div></div><div></div>
     </div>
 
-    <!-- Giao diện trên (Top UI) -->
+    <!-- Top UI -->
     <div class="absolute top-0 left-0 right-0 p-5 flex justify-between items-center z-10" style="background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));">
         <button id="openSettingsBtn" class="p-2 rounded-full hover:bg-white/20 transition-colors">
-            <!-- Icon Cài đặt (SVG) - Updated -->
+            <!-- Settings Icon (SVG) - Updated -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
         </button>
-        <!-- Thêm các nút khác ở đây nếu cần (vd: flash) -->
+        <!-- Add other buttons here if needed (e.g. flash) -->
     </div>
 
-    <!-- Giao diện dưới (Bottom UI) -->
+    <!-- Bottom UI -->
     <div class="absolute bottom-0 left-0 right-0 p-5 z-10" style="background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));">
-        <!-- Chuyển đổi chế độ -->
+        <!-- Mode switcher -->
         <div class="flex justify-center items-center gap-4 mb-4">
-            <button id="modePhoto" class="text-lg font-bold text-white transition-all">ẢNH</button>
+            <button id="modePhoto" class="text-lg font-bold text-white transition-all">PHOTO</button>
             <button id="modeVideo" class="text-lg font-medium text-gray-400 transition-all">VIDEO</button>
         </div>
         
-        <!-- Hàng nút chính -->
+        <!-- Main button row -->
         <div class="flex justify-between items-center">
-            <!-- Thư viện -->
+            <!-- Gallery -->
             <button id="openGalleryBtn" class="w-14 h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-colors">
-                <!-- Icon Thư viện (SVG) - Updated -->
+                <!-- Gallery Icon (SVG) - Updated -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" />
                 </svg>
             </button>
 
-            <!-- Nút Chụp/Quay -->
+            <!-- Capture/Record Button -->
             <button id="captureBtn" class="capture-btn flex items-center justify-center"></button>
 
-            <!-- Lật Camera -->
+            <!-- Flip Camera -->
             <button id="flipCameraBtn" class="w-14 h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-colors">
-                <!-- Icon Lật Camera (SVG) - Updated -->
+                <!-- Flip Camera Icon (SVG) - Updated -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
@@ -187,67 +269,67 @@
     <!-- MODALS (POPUP) -->
     <!-- =================================== -->
 
-    <!-- Modal Chung (Overlay) -->
+    <!-- Common Modal (Overlay) -->
     <div id="modalOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-md z-40 hidden" data-target=""></div>
 
-    <!-- Modal: Cài đặt -->
+    <!-- Modal: Settings -->
     <div id="settingsModal" class="fixed bottom-0 left-0 right-0 bg-neutral-900 rounded-t-2xl p-5 shadow-lg z-50 transform translate-y-full transition-transform duration-300 max-h-[80vh] flex flex-col">
-        <h3 class="text-xl font-bold text-center mb-4 flex-shrink-0">Cài đặt</h3>
+        <h3 class="text-xl font-bold text-center mb-4 flex-shrink-0">Settings</h3>
         
         <div class="space-y-4 overflow-y-auto modal-body flex-1">
-            <!-- Tự động tải về -->
+            <!-- Auto download -->
             <div class="flex justify-between items-center p-3 bg-neutral-800 rounded-lg">
-                <span class="text-gray-200">Tự động tải về</span>
+                <span class="text-gray-200">Auto download</span>
                 <button id="toggleAutoDownload" class="toggle-bg">
                     <span class="toggle-dot"></span>
                 </button>
             </div>
             
-            <!-- Lưới -->
+            <!-- Grid -->
             <div class="flex justify-between items-center p-3 bg-neutral-800 rounded-lg">
-                <span class="text-gray-200">Hiển thị lưới</span>
+                <span class="text-gray-200">Show grid</span>
                 <button id="toggleGrid" class="toggle-bg">
                     <span class="toggle-dot"></span>
                 </button>
             </div>
 
-            <!-- Dấu chìm (Watermark) -->
+            <!-- Watermark -->
             <div class="flex justify-between items-center p-3 bg-neutral-800 rounded-lg">
-                <span class="text-gray-200">Dấu chìm (text2)</span>
+                <span class="text-gray-200">Watermark (text2)</span>
                 <button id="toggleWatermark" class="toggle-bg">
                     <span class="toggle-dot"></span>
                 </button>
             </div>
 
-            <!-- Lật ảnh camera trước -->
+            <!-- Mirror front camera -->
             <div class="flex justify-between items-center p-3 bg-neutral-800 rounded-lg">
-                <span class="text-gray-200">Lật ảnh camera trước</span>
+                <span class="text-gray-200">Mirror front camera</span>
                 <button id="toggleMirrorFrontCamera" class="toggle-bg">
                     <span class="toggle-dot"></span>
                 </button>
             </div>
 
-            <!-- Nút chọn Độ phân giải -->
+            <!-- Resolution button -->
             <button id="openResolutionBtn" class="w-full text-left p-3 bg-neutral-800 rounded-lg flex justify-between items-center hover:bg-neutral-700">
-                <span>Độ phân giải</span>
-                <span id="currentResolution" class="text-gray-400">Mặc định</span>
+                <span>Resolution</span>
+                <span id="currentResolution" class="text-gray-400">Default</span>
             </button>
 
-            <!-- Nút chọn Tỷ lệ -->
+            <!-- Aspect ratio button -->
             <button id="openAspectRatioBtn" class="w-full text-left p-3 bg-neutral-800 rounded-lg flex justify-between items-center hover:bg-neutral-700">
-                <span>Tỷ lệ khung hình</span>
+                <span>Aspect ratio</span>
                 <span id="currentAspectRatio" class="text-gray-400">16:9</span>
             </button>
 
-            <!-- Nút chọn Loại ảnh -->
+            <!-- Image type button -->
             <button id="openImageTypeBtn" class="w-full text-left p-3 bg-neutral-800 rounded-lg flex justify-between items-center hover:bg-neutral-700">
-                <span>Loại ảnh</span>
+                <span>Image type</span>
                 <span id="currentImageType" class="text-gray-400">PNG</span>
             </button>
             
-            <!-- Cập nhật (Xóa Cache) -->
+            <!-- Update (Clear Cache) -->
             <button id="updateAppBtn" class="w-full p-3 bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                Cập nhật (Xóa Cache & Tải lại)
+                Update (Clear Cache & Reload)
             </button>
         </div>
         
@@ -258,50 +340,50 @@
         </button>
     </div>
 
-    <!-- Modal: Thư viện -->
+    <!-- Modal: Gallery -->
     <div id="galleryModal" class="fixed inset-0 bg-neutral-900 z-50 transform translate-y-full transition-transform duration-300 flex flex-col">
-        <!-- Header Thư viện -->
+        <!-- Gallery Header -->
         <div class="flex-shrink-0 flex justify-between items-center p-4 border-b border-neutral-700">
             <button id="closeGalleryBtn" class="p-2 text-gray-400 hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </button>
-            <h3 class="text-xl font-bold">Thư viện</h3>
+            <h3 class="text-xl font-bold">Gallery</h3>
             <div class="flex gap-2">
-                <!-- Tải tất cả -->
-                <button id="downloadAllBtn" class="p-2 text-gray-400 hover:text-white" title="Tải tất cả">
+                <!-- Download all -->
+                <button id="downloadAllBtn" class="p-2 text-gray-400 hover:text-white" title="Download all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m7.5 7.5 4.5-4.5m0 0 4.5 4.5m-4.5-4.5v9m0 0H6A2.25 2.25 0 0 0 3.75 15v.75c0 1.242.984 2.25 2.25 2.25h13.5A2.25 2.25 0 0 0 21 15.75V15A2.25 2.25 0 0 0 18.75 12.75h-3.75m0 0h-.375c-.621 0-1.125.504-1.125 1.125v.75c0 .621.504 1.125 1.125 1.125h.375m0-3h.375c.621 0 1.125.504 1.125 1.125v.75c0 .621-.504 1.125-1.125 1.125h-.375m0 0H15m-1.125-3H12m0 0v3m0-3c0-.621-.504-1.125-1.125-1.125H9.75c-.621 0-1.125.504-1.125 1.125v3c0 .621.504 1.125 1.125 1.125h.375m0-3H12" />
                     </svg>
                 </button>
-                <!-- Xóa tất cả -->
-                <button id="deleteAllBtn" class="p-2 text-red-500 hover:text-red-400" title="Xóa tất cả">
+                <!-- Delete all -->
+                <button id="deleteAllBtn" class="p-2 text-red-500 hover:text-red-400" title="Delete all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l-.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" />
                     </svg>
                 </button>
             </div>
         </div>
-        <!-- Nội dung Thư viện -->
+        <!-- Gallery Content -->
         <div id="galleryContainer" class="modal-body flex-1 p-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 overflow-y-auto">
-            <!-- Ảnh/Video sẽ được thêm vào đây bằng JS -->
-            <p id="galleryPlaceholder" class="col-span-full text-center text-gray-500 mt-10">Thư viện trống.</p>
+            <!-- Photos/Videos will be added here by JS -->
+            <p id="galleryPlaceholder" class="col-span-full text-center text-gray-500 mt-10">Gallery is empty.</p>
         </div>
     </div>
 
-    <!-- Modal: Lựa chọn con (dùng chung) -->
+    <!-- Modal: Selection (shared) -->
     <div id="selectionModal" class="fixed bottom-0 left-0 right-0 bg-neutral-900 rounded-t-2xl p-5 shadow-lg z-50 transform translate-y-full transition-transform duration-300 max-h-[70vh] flex flex-col">
-        <h3 id="selectionTitle" class="text-lg font-bold text-center mb-4 flex-shrink-0">Lựa chọn</h3>
+        <h3 id="selectionTitle" class="text-lg font-bold text-center mb-4 flex-shrink-0">Selection</h3>
         <div id="selectionOptions" class="space-y-2 overflow-y-auto modal-body">
-            <!-- Các lựa chọn sẽ được thêm vào đây bằng JS -->
+            <!-- Options will be added here by JS -->
         </div>
         <button id="closeSelectionModal" class="mt-4 w-full p-3 bg-neutral-800 rounded-lg font-semibold hover:bg-neutral-700 flex-shrink-0">
-            Hủy
+            Cancel
         </button>
     </div>
 
-    <!-- Modal: Xem ảnh/video -->
+    <!-- Modal: View photo/video -->
     <div id="viewerModal" class="fixed inset-0 bg-black z-50 hidden flex flex-col">
         <div class="flex-shrink-0 flex justify-between items-center p-4" style="background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));">
             <button id="closeViewerBtn" class="p-2 text-white">
@@ -317,13 +399,13 @@
                 </button>
                 <button id="deleteViewBtn" class="p-2 text-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l-.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" />
                     </svg>
                 </button>
             </div>
         </div>
         <div class="flex-1 flex items-center justify-center p-4">
-            <img id="viewerImage" src="" class="max-w-full max-h-full hidden object-contain transition-transform duration-300" alt="Xem ảnh">
+            <img id="viewerImage" src="" class="max-w-full max-h-full hidden object-contain transition-transform duration-300" alt="View image">
             <video id="viewerVideo" src="" class="max-w-full max-h-full hidden" controls></video>
         </div>
     </div>
@@ -387,7 +469,7 @@
 
             // === 2. State Management ===
             let currentStream = null;
-            let currentFacingMode = 'environment'; // 'user' (trước) or 'environment' (sau)
+            let currentFacingMode = 'environment'; // 'user' (front) or 'environment' (rear)
             let currentMode = 'photo'; // 'photo' or 'video'
             let isRecording = false;
             let mediaRecorder = null;
@@ -403,15 +485,15 @@
                 autoDownload: false,
                 grid: false,
                 watermark: false,
-                mirrorFrontCamera: true, // Mặc định lật ảnh camera trước
+                mirrorFrontCamera: true, // Default mirror front camera
                 imageType: 'image/png',
                 imageExtension: 'png',
-                resolution: { label: 'Mặc định', value: null },
+                resolution: { label: 'Default', value: null },
                 aspectRatio: { label: '16:9', value: 16/9 },
             };
 
             const resolutions = [
-                { label: 'Mặc định', value: null },
+                { label: 'Default', value: null },
                 { label: '4K (3840x2160)', value: { width: 3840, height: 2160 } },
                 { label: 'Full HD (1920x1080)', value: { width: 1920, height: 1080 } },
                 { label: 'HD (1280x720)', value: { width: 1280, height: 720 } },
@@ -421,7 +503,7 @@
                 { label: '16:9', value: 16/9 },
                 { label: '4:3', value: 4/3 },
                 { label: '1:1', value: 1 },
-                { label: '9:16 (Dọc)', value: 9/16 },
+                { label: '9:16 (Portrait)', value: 9/16 },
             ];
             const imageTypes = [
                 { label: 'PNG', value: 'image/png', ext: 'png' },
@@ -463,7 +545,7 @@
 
                 transaction.oncomplete = () => {
                     console.log('Media saved to DB');
-                    // Tự động tải nếu bật
+                    // Auto download if enabled
                     if (settings.autoDownload && type === 'photo') {
                         downloadMedia(blob, `text2cam.${settings.imageExtension}`);
                     }
@@ -482,7 +564,7 @@
                 const store = transaction.objectStore(STORE_NAME);
                 const request = store.getAll();
                 request.onsuccess = (event) => {
-                    callback(event.target.result.reverse()); // Mới nhất lên trước
+                    callback(event.target.result.reverse()); // Latest first
                 };
             }
 
@@ -493,7 +575,7 @@
                 store.delete(id);
                 transaction.oncomplete = () => {
                     console.log(`Media ${id} deleted`);
-                    renderGallery(); // Cập nhật lại thư viện
+                    renderGallery(); // Update gallery
                     if (viewerCurrentId === id) {
                         closeViewer();
                     }
@@ -534,7 +616,7 @@
                         facingMode: currentFacingMode,
                         aspectRatio: settings.aspectRatio.value ? { exact: settings.aspectRatio.value } : undefined,
                     },
-                    audio: (currentMode === 'video') // Chỉ yêu cầu audio khi ở chế độ video
+                    audio: (currentMode === 'video') // Only request audio in video mode
                 };
 
                 if (settings.resolution.value) {
@@ -548,7 +630,7 @@
                     video.style.transform = (currentFacingMode === 'user' && settings.mirrorFrontCamera) ? 'scaleX(-1)' : 'scaleX(1)';
                 } catch (err) {
                     console.error("Error accessing camera:", err);
-                    alert("Không thể truy cập camera. Vui lòng cấp quyền.");
+                    alert("Cannot access camera. Please grant permission.");
                 }
             }
 
@@ -559,7 +641,7 @@
 
             // === 5. Capture Functions ===
             function takePicture() {
-                // Hiệu ứng flash
+                // Flash effect
                 flashEffect.classList.add('flash');
                 setTimeout(() => flashEffect.classList.remove('flash'), 300);
 
@@ -569,7 +651,7 @@
                 canvas.width = videoWidth;
                 canvas.height = videoHeight;
 
-                // Lật ảnh nếu là camera trước và cài đặt bật
+                // Mirror image if front camera and setting enabled
                 context.save();
                 if (currentFacingMode === 'user' && settings.mirrorFrontCamera) {
                     context.translate(videoWidth, 0);
@@ -579,7 +661,7 @@
                 context.drawImage(video, 0, 0, videoWidth, videoHeight);
                 context.restore();
 
-                // Thêm watermark nếu bật
+                // Add watermark if enabled
                 if (settings.watermark) {
                     context.font = `${Math.min(videoWidth, videoHeight) * 0.05}px Arial`;
                     context.fillStyle = 'rgba(255, 255, 255, 0.7)';
@@ -599,7 +681,7 @@
                 recordedChunks = [];
                 captureBtn.classList.add('recording');
 
-                // Lấy cả track video và audio
+                // Get both video and audio tracks
                 const tracks = [...currentStream.getVideoTracks(), ...currentStream.getAudioTracks()];
                 const combinedStream = new MediaStream(tracks);
 
@@ -645,7 +727,7 @@
                 modalOverlay.classList.add('hidden');
                 modalOverlay.dataset.target = '';
                 
-                // Đóng cả modal lựa chọn con
+                // Also close selection modal
                 selectionModal.classList.add('translate-y-full');
             }
             
@@ -678,7 +760,7 @@
                 // Grid
                 gridOverlay.classList.toggle('hidden', !settings.grid);
 
-                // Preview transform theo cài đặt lật ảnh
+                // Preview transform according to mirror setting
                 video.style.transform = (currentFacingMode === 'user' && settings.mirrorFrontCamera) ? 'scaleX(-1)' : 'scaleX(1)';
 
                 // Labels
@@ -699,10 +781,10 @@
                 }
             }
 
-            // Mở modal lựa chọn chung
+            // Open common selection modal
             function openSelectionModal(title, options, currentSettingKey, callback) {
                 selectionTitle.textContent = title;
-                selectionOptions.innerHTML = ''; // Xóa các lựa chọn cũ
+                selectionOptions.innerHTML = ''; // Clear old options
                 
                 options.forEach(option => {
                     const isSelected = JSON.stringify(settings[currentSettingKey]) === JSON.stringify(option);
@@ -718,7 +800,7 @@
                         callback(option);
                         saveSettings();
                         selectionModal.classList.add('translate-y-full');
-                        // Khởi động lại camera nếu thay đổi độ phân giải hoặc tỷ lệ
+                        // Restart camera if resolution or aspect ratio changed
                         if (currentSettingKey === 'resolution' || currentSettingKey === 'aspectRatio') {
                             startCamera();
                         }
@@ -726,14 +808,14 @@
                     selectionOptions.appendChild(optionBtn);
                 });
                 
-                openModal(selectionModal, true); // true vì đây là modal con
+                openModal(selectionModal, true); // true because this is a sub-modal
             }
 
 
             // === 8. Gallery Functions ===
             function renderGallery() {
                 getGallery((mediaItems) => {
-                    galleryContainer.innerHTML = ''; // Xóa nội dung cũ
+                    galleryContainer.innerHTML = ''; // Clear old content
                     if (mediaItems.length === 0) {
                         galleryContainer.appendChild(galleryPlaceholder);
                         return;
@@ -753,18 +835,18 @@
                             mediaElement = document.createElement('video');
                             mediaElement.src = url;
                             mediaElement.className = 'w-full h-full object-cover';
-                            // Thêm icon play cho video
+                            // Add play icon for video
                             const playIcon = document.createElement('div');
                             playIcon.className = 'absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity';
                             playIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-white/90"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.92-1.4 1.671-.983l5.603 3.113Z" clip-rule="evenodd" /></svg>`;
                             itemWrapper.appendChild(playIcon);
                         }
                         
-                        // Nút ẩn (hiện khi hover)
+                        // Hidden buttons (show on hover)
                         const controls = document.createElement('div');
                         controls.className = 'absolute bottom-0 left-0 right-0 p-1 flex justify-end gap-1 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity';
                         
-                        // Nút tải
+                        // Download button
                         const downloadBtn = document.createElement('button');
                         downloadBtn.className = 'p-1 text-white hover:text-blue-400';
                         downloadBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>`;
@@ -774,13 +856,13 @@
                             downloadMedia(item.blob, `text2cam_${item.id}.${ext}`);
                         };
                         
-                        // Nút xóa
+                        // Delete button
                         const deleteBtn = document.createElement('button');
                         deleteBtn.className = 'p-1 text-white hover:text-red-500';
-                        deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" /></svg>`;
+                        deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12.502 0c-.34.053-.68.107-1.022.166m11.022 0L12 5.25v0l-.384.455M18.16 5.79l-1.17-1.403a.375.375 0 0 0-.488-.141l-3.027.954a.375.375 0 0 1-.432-.495V3m0 0l-3.027-.954a.375.375 0 0 0-.488.141L6.84 5.79m0 0L12 5.25v0l-.384.455m0 0v.008c.004.002.007.004.01.006.002.002.005.004.007.006" /></svg>`;
                         deleteBtn.onclick = (e) => {
                             e.stopPropagation();
-                            if (confirm('Bạn có chắc muốn xóa ảnh/video này?')) {
+                            if (confirm('Are you sure you want to delete this photo/video?')) {
                                 deleteMedia(item.id);
                             }
                         };
@@ -791,7 +873,7 @@
                         itemWrapper.appendChild(mediaElement);
                         itemWrapper.appendChild(controls);
                         
-                        // Click để xem
+                        // Click to view
                         itemWrapper.onclick = () => {
                             openViewer(item.id, url, item.type, item.facingMode);
                         };
@@ -815,12 +897,12 @@
             function downloadAll() {
                 getGallery((mediaItems) => {
                     if (mediaItems.length === 0) {
-                        alert("Thư viện trống.");
+                        alert("Gallery is empty.");
                         return;
                     }
                     mediaItems.forEach((item, index) => {
                         const ext = item.type === 'photo' ? settings.imageExtension : 'webm';
-                        // Thêm timeout nhỏ để trình duyệt xử lý nhiều lượt tải
+                        // Add small timeout for browser to handle multiple downloads
                         setTimeout(() => {
                             downloadMedia(item.blob, `text2cam_${item.id}.${ext}`);
                         }, index * 300);
@@ -835,7 +917,7 @@
                 if (type === 'photo') {
                     viewerImage.src = url;
                     viewerImage.classList.remove('hidden');
-                    // Lật ảnh nếu là cam trước VÀ cài đặt được bật
+                    // Mirror image if front camera AND setting enabled
                     viewerImage.style.transform = (facingMode === 'user' && settings.mirrorFrontCamera) ? 'scaleX(-1)' : 'scaleX(1)';
                     
                     viewerVideo.classList.add('hidden');
@@ -853,7 +935,7 @@
             function closeViewer() {
                 viewerModal.classList.add('hidden');
                 viewerImage.src = '';
-                viewerImage.style.transform = 'scaleX(1)'; // Reset lật
+                viewerImage.style.transform = 'scaleX(1)'; // Reset mirror
                 viewerVideo.src = '';
                 viewerVideo.pause();
                 viewerCurrentId = null;
@@ -862,7 +944,7 @@
 
             // === 10. Event Listeners ===
             
-            // Chuyển chế độ
+            // Mode switching
             modePhotoBtn.addEventListener('click', () => {
                 if (isRecording) stopRecording();
                 currentMode = 'photo';
@@ -873,7 +955,7 @@
                 captureBtn.classList.remove('recording');
                 openImageTypeBtn.disabled = false;
                 openImageTypeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                startCamera(); // Khởi động lại camera để tắt audio
+                startCamera(); // Restart camera to disable audio
             });
             modeVideoBtn.addEventListener('click', () => {
                 currentMode = 'video';
@@ -883,10 +965,10 @@
                 modePhotoBtn.classList.remove('font-bold', 'text-white');
                 openImageTypeBtn.disabled = true;
                 openImageTypeBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                startCamera(); // Khởi động lại camera để bật audio
+                startCamera(); // Restart camera to enable audio
             });
             
-            // Nút chính
+            // Main buttons
             captureBtn.addEventListener('click', () => {
                 if (currentMode === 'photo') {
                     takePicture();
@@ -902,7 +984,7 @@
             flipCameraBtn.addEventListener('click', flipCamera);
             modalOverlay.addEventListener('click', closeModal);
 
-            // Cài đặt
+            // Settings
             openSettingsBtn.addEventListener('click', () => openModal(settingsModal));
             closeSettingsBtn.addEventListener('click', () => settingsModal.classList.add('translate-y-full'));
 
@@ -923,30 +1005,30 @@
                 saveSettings();
             });
             updateAppBtn.addEventListener('click', () => {
-                if (confirm('Xóa cache và tải lại trang? Thư viện ảnh sẽ được giữ lại.')) {
-                    location.reload(); // Không dùng 'true' để cố gắng giữ IndexedDB
+                if (confirm('Clear cache and reload page? Gallery photos will be kept.')) {
+                    location.reload(); // Don't use 'true' to try to keep IndexedDB
                 }
             });
 
-            // Mở modal lựa chọn con
+            // Open selection sub-modals
             openResolutionBtn.addEventListener('click', () => {
-                openSelectionModal('Độ phân giải', resolutions, 'resolution', (option) => {
+                openSelectionModal('Resolution', resolutions, 'resolution', (option) => {
                     settings.resolution = option;
                 });
             });
             openAspectRatioBtn.addEventListener('click', () => {
-                openSelectionModal('Tỷ lệ khung hình', aspectRatios, 'aspectRatio', (option) => {
+                openSelectionModal('Aspect ratio', aspectRatios, 'aspectRatio', (option) => {
                     settings.aspectRatio = option;
                 });
             });
             openImageTypeBtn.addEventListener('click', () => {
-                openSelectionModal('Loại ảnh', imageTypes, 'imageType', (option) => {
+                openSelectionModal('Image type', imageTypes, 'imageType', (option) => {
                     settings.imageType = option.value;
                     settings.imageExtension = option.ext;
                 });
             });
 
-            // Thư viện
+            // Gallery
             openGalleryBtn.addEventListener('click', () => {
                 renderGallery();
                 openModal(galleryModal);
@@ -954,7 +1036,7 @@
             closeGalleryBtn.addEventListener('click', () => galleryModal.classList.add('translate-y-full'));
             
             deleteAllBtn.addEventListener('click', () => {
-                if (confirm('Bạn có chắc muốn XÓA TẤT CẢ ảnh và video? Hành động này không thể hoàn tác.')) {
+                if (confirm('Are you sure you want to DELETE ALL photos and videos? This action cannot be undone.')) {
                     clearGallery();
                 }
             });
@@ -963,7 +1045,7 @@
             // Viewer
             closeViewerBtn.addEventListener('click', closeViewer);
             deleteViewBtn.addEventListener('click', () => {
-                if (viewerCurrentId && confirm('Bạn có chắc muốn xóa ảnh/video này?')) {
+                if (viewerCurrentId && confirm('Are you sure you want to delete this photo/video?')) {
                     deleteMedia(viewerCurrentId);
                 }
             });
@@ -977,7 +1059,7 @@
                 });
             });
 
-            // === 11. Khởi động ===
+            // === 11. Initialization ===
             initDB();
             loadSettings();
             startCamera();
